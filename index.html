@@ -1,0 +1,816 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PD AURUM SCENTS — More than a scent, an identity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #080808;
+      --black-soft: #111111;
+      --white: #f5f0e8;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gold-dim: #7a6030;
+      --gray: #1a1a1a;
+      --gray-2: #242424;
+      --text-muted: #9b9387;
+      --border: rgba(201, 168, 76, 0.18);
+      --max-width: 1180px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.05;
+      z-index: 999;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08) 0 1px, transparent 1px),
+        radial-gradient(circle at 80% 30%, rgba(255,255,255,0.05) 0 1px, transparent 1px),
+        radial-gradient(circle at 40% 80%, rgba(255,255,255,0.06) 0 1px, transparent 1px);
+      background-size: 180px 180px, 220px 220px, 260px 260px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .gold-line {
+      width: 72px;
+      height: 1px;
+      margin: 0 auto;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .section {
+      padding: 88px 0;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 400;
+      letter-spacing: 1px;
+      line-height: 1.08;
+      margin-bottom: 12px;
+    }
+
+    .section-title span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .section-sub {
+      max-width: 740px;
+      margin: 0 auto;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 14px 24px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: all 0.28s ease;
+    }
+
+    .btn:hover {
+      background: var(--gold);
+      color: var(--black);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border-color: rgba(245, 240, 232, 0.18);
+      color: var(--white);
+    }
+
+    .btn-secondary:hover {
+      background: var(--white);
+      border-color: var(--white);
+      color: var(--black);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 8, 8, 0.82);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand-top {
+      color: var(--gold);
+      font-size: 9px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+    }
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      letter-spacing: 3px;
+      line-height: 1;
+    }
+
+    .brand-name span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: flex;
+      align-items: center;
+      position: relative;
+      background:
+        radial-gradient(circle at top center, rgba(201, 168, 76, 0.11), transparent 32%),
+        linear-gradient(180deg, rgba(255,255,255,0.02), transparent 18%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .hero-copy .eyebrow {
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+
+    .hero-title span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .hero-tagline {
+      font-size: 14px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    .hero-desc {
+      max-width: 620px;
+      color: var(--white);
+      font-size: 16px;
+      margin-bottom: 28px;
+    }
+
+    .hero-note {
+      margin-top: 18px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .hero-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(201,168,76,0.06));
+      border: 1px solid var(--border);
+      padding: 32px;
+      min-height: 420px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(201,168,76,0.16);
+      pointer-events: none;
+    }
+
+    .hero-card-top {
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      line-height: 1.12;
+      margin-bottom: 20px;
+    }
+
+    .hero-card-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .hero-card-item {
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .hero-card-item strong {
+      display: block;
+      color: var(--gold);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .hero-card-item span {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .product-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 28px 22px;
+      min-height: 320px;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+      background: linear-gradient(180deg, rgba(201,168,76,0.08), rgba(255,255,255,0.01));
+    }
+
+    .product-number {
+      color: var(--gold-dim);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      line-height: 1.05;
+      margin-bottom: 10px;
+      color: var(--gold);
+    }
+
+    .product-role {
+      color: var(--white);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .product-desc {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      font-size: 12px;
+      color: var(--white);
+    }
+
+    .need-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .need-card {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--black-soft);
+      padding: 28px 24px;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .need-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .need-icon {
+      color: var(--gold);
+      font-size: 26px;
+      margin-bottom: 14px;
+    }
+
+    .need-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .need-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .brand-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .brand-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 28px;
+    }
+
+    .brand-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      color: var(--gold);
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+
+    .brand-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .brand-statement {
+      margin-top: 34px;
+      padding: 36px 28px;
+      text-align: center;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top, rgba(201,168,76,0.10), transparent 55%);
+    }
+
+    .brand-statement p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 4vw, 40px);
+      line-height: 1.35;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .brand-statement span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .cta-box {
+      text-align: center;
+      padding: 54px 28px;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(201,168,76,0.08), rgba(255,255,255,0.01));
+    }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.08;
+      margin-bottom: 14px;
+    }
+
+    .cta-title span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .cta-desc {
+      max-width: 720px;
+      margin: 0 auto 24px;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    footer {
+      padding: 28px 0 40px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+      color: #5f5a52;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    footer span {
+      color: var(--gold-dim);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .brand-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .need-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 56px 0 72px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px 0;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .hero-title {
+        letter-spacing: 2px;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .hero-card {
+        min-height: auto;
+      }
+
+      .btn-row {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <div class="brand-top">Thai fragrance brand</div>
+        <div class="brand-name">PD <span>AURUM</span> SCENTS</div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#scents">Scents</a>
+        <a href="#choose">Gift Guide</a>
+        <a href="#brand">Brand</a>
+        <a href="#contact">Order</a>
+        <a href="tools.html">AI Tools</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">PD AURUM SCENTS</div>
+          <h1 class="hero-title">More than a scent <br><span>— an identity</span></h1>
+          <div class="hero-tagline">กลิ่นที่ไม่ได้มีแค่ความหอม แต่มีบทบาทของตัวเอง</div>
+          <p class="hero-desc">
+            PD AURUM SCENTS คือแบรนด์น้ำหอมและของหอมที่ออกแบบให้แต่ละกลิ่นมีหน้าที่ มีบุคลิก
+            และมีความรู้สึกที่ต่างกันออกไป ไม่ใช่แค่การดมแล้วผ่านไป
+            แต่เป็นการเลือกกลิ่นที่เหมาะกับคน ใช้ในจังหวะที่ใช่ และสื่อความหมายได้จริง
+          </p>
+
+          <div class="btn-row">
+            <a class="btn" href="#scents">เลือกดูกลิ่น</a>
+            <a class="btn btn-secondary" href="#choose">ซื้อเป็นของขวัญ</a>
+          </div>
+
+          <p class="hero-note">
+            สำหรับคนที่อยากเลือกน้ำหอมให้มีความหมายมากขึ้น ทั้งใช้เอง ซื้อให้แฟน หรือมอบเป็นของฝาก
+          </p>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-top">Signature Selection</div>
+          <div class="hero-card-title">เลือกกลิ่นจาก <br>ความรู้สึกที่อยากให้เขาจำ</div>
+          <div class="gold-line" style="margin:0 0 24px;"></div>
+
+          <div class="hero-card-list">
+            <div class="hero-card-item">
+              <strong>DR.Savage</strong>
+              <span>สดชื่น สุขุม มีจุดยืนในแบบของตัวเอง</span>
+            </div>
+            <div class="hero-card-item">
+              <strong>CL.Very Good Diva</strong>
+              <span>หวาน สดใส น่ารัก แต่มีเสน่ห์ที่ต่างออกไป</span>
+            </div>
+            <div class="hero-card-item">
+              <strong>อักขระทอง</strong>
+              <span>ความหอมที่มาพร้อมความสิริมงคลและความหมาย</span>
+            </div>
+            <div class="hero-card-item">
+              <strong>Gift Set Diffuser</strong>
+              <span>ของฝากที่ให้ความผ่อนคลายและความใส่ใจ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scents">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Our Collection</div>
+          <h2 class="section-title">4 กลิ่น <span>4 บทบาท</span></h2>
+          <p class="section-sub">
+            แต่ละกลิ่นไม่ได้ถูกทำมาให้ “หอมเหมือนกันหมด”
+            แต่ถูกออกแบบให้ตอบความรู้สึกและบุคลิกที่ต่างกัน
+          </p>
+        </div>
+
+        <div class="products-grid">
+          <article class="product-card">
+            <div class="product-number">01 / For Him</div>
+            <h3 class="product-name">DR.Savage</h3>
+            <p class="product-role">สดชื่น สุขุม ดูมีเสน่ห์ และมีจุดยืน</p>
+            <p class="product-desc">
+              เหมาะกับผู้ชายที่อยากให้กลิ่นสะท้อนความมั่นใจแบบไม่ต้องพยายามมาก
+              เป็นกลิ่นที่ดูนิ่ง แต่มีพลังในตัวเอง
+            </p>
+            <div class="product-meta">
+              <span>10ml</span>
+              <span>190 บาท</span>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-number">02 / For Her</div>
+            <h3 class="product-name">CL.Very Good Diva</h3>
+            <p class="product-role">หอมหวาน สดใส น่ารัก และแตกต่าง</p>
+            <p class="product-desc">
+              สำหรับคนที่อยากมีกลิ่นหวานแบบมีคาแรกเตอร์ ไม่ธรรมดา
+              ใช้แล้วให้ความรู้สึกสดใส มีเสน่ห์ และน่าจดจำ
+            </p>
+            <div class="product-meta">
+              <span>10ml</span>
+              <span>190 บาท</span>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-number">03 / Meaningful Scent</div>
+            <h3 class="product-name">อักขระทอง</h3>
+            <p class="product-role">วนิลลาและไม้อ่อน พร้อมความสิริมงคล</p>
+            <p class="product-desc">
+              กลิ่นที่ให้มากกว่าความหอม ด้วยความหมายเรื่องเรียกทรัพย์ ลูกค้ารัก
+              ชีวิตราบรื่น เหมาะกับคนที่ชอบกลิ่นและความหมายไปพร้อมกัน
+            </p>
+            <div class="product-meta">
+              <span>30ml</span>
+              <span>390 บาท</span>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-number">04 / Gift & Space</div>
+            <h3 class="product-name">Gift Set Diffuser</h3>
+            <p class="product-role">3 กลิ่นใน 1 เซต สำหรับความผ่อนคลาย</p>
+            <p class="product-desc">
+              เหมาะสำหรับห้องนอน ห้องพัก ห้องน้ำ หรือแม้แต่ Lobby โรงแรม
+              เป็นของฝากที่ดูดี ใช้ได้จริง และให้ความรู้สึกใส่ใจ
+            </p>
+            <div class="product-meta">
+              <span>1 Set</span>
+              <span>890 บาท</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="choose">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Choose by intention</div>
+          <h2 class="section-title">เลือกตาม <span>ความต้องการ</span></h2>
+          <p class="section-sub">
+            ถ้ายังไม่แน่ใจว่าจะเริ่มจากกลิ่นไหนดี ลองเลือกจากเหตุผลที่คุณกำลังจะซื้อ
+          </p>
+        </div>
+
+        <div class="need-grid">
+          <article class="need-card">
+            <div class="need-icon">♡</div>
+            <h3 class="need-title">ซื้อให้แฟน</h3>
+            <p class="need-desc">
+              ถ้าคุณอยากให้ของขวัญชิ้นนี้มีความหมายและทำให้เขาหรือเธอรู้สึกพิเศษ
+              เลือกจากกลิ่นที่เข้ากับบุคลิก จะทำให้ของขวัญดูใส่ใจมากขึ้น
+            </p>
+            <a class="btn" href="tools.html">ใช้ Scent Finder</a>
+          </article>
+
+          <article class="need-card">
+            <div class="need-icon">✦</div>
+            <h3 class="need-title">ซื้อใช้เอง</h3>
+            <p class="need-desc">
+              เลือกกลิ่นที่สะท้อนตัวตนของคุณในแบบที่อยากให้คนจดจำ
+              เพราะกลิ่นที่ดีไม่ใช่แค่หอม แต่ต้องรู้สึกว่าใช่กับคุณจริง ๆ
+            </p>
+            <a class="btn" href="#scents">ดูกลิ่นทั้งหมด</a>
+          </article>
+
+          <article class="need-card">
+            <div class="need-icon">❖</div>
+            <h3 class="need-title">ซื้อเป็นของฝาก</h3>
+            <p class="need-desc">
+              ถ้าคุณอยากได้ของฝากที่ดูดี ใช้งานได้จริง และไม่ธรรมดา
+              Gift Set Diffuser คือทางเลือกที่ให้ความรู้สึกอบอุ่นและน่าจดจำ
+            </p>
+            <a class="btn" href="#contact">สอบถามสั่งซื้อ</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="brand">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Brand perspective</div>
+          <h2 class="section-title">น้ำหอมที่ไม่ได้มีแค่ <span>ความหอม</span></h2>
+          <p class="section-sub">
+            เราเชื่อว่าน้ำหอมแต่ละกลิ่นควรมีหน้าที่และความรู้สึกต่างกัน
+            ไม่ใช่แค่ให้เลือกจากคำว่าหอม แต่ให้เลือกจากตัวตนและความหมาย
+          </p>
+        </div>
+
+        <div class="brand-grid">
+          <div class="brand-card">
+            <h3>Each scent has a role</h3>
+            <p>
+              ไม่ว่าจะเป็นความมั่นใจ ความสดใส ความสิริมงคล หรือความผ่อนคลาย
+              กลิ่นแต่ละตัวถูกตั้งใจให้สื่อสิ่งที่ต่างกันอย่างชัดเจน
+            </p>
+          </div>
+
+          <div class="brand-card">
+            <h3>More than testing at the shelf</h3>
+            <p>
+              มากกว่าการดมทดลองหน้าร้าน เราอยากให้ลูกค้าเลือกกลิ่นจากความรู้สึกที่อยากเป็น
+              หรือความรู้สึกที่อยากมอบให้ใครสักคน
+            </p>
+          </div>
+        </div>
+
+        <div class="brand-statement">
+          <p>
+            PD AURUM SCENTS คือการเลือกกลิ่นที่ <span>เข้ากับตัวตน</span>
+            และทำให้ความหอมมีความหมายมากกว่าที่เคย
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="cta-box">
+          <div class="eyebrow">Ready to order</div>
+          <h2 class="cta-title">เลือกกลิ่นที่ใช่ <span>แล้วให้มันพูดแทนคุณ</span></h2>
+          <p class="cta-desc">
+            จะซื้อใช้เอง ซื้อให้แฟน หรือเลือกเป็นของฝาก
+            คุณสามารถสั่งซื้อผ่านแชท หรือใช้ตัวช่วยเลือกกลิ่นเพื่อเริ่มต้นได้ทันที
+          </p>
+
+          <div class="btn-row" style="justify-content:center;">
+            <a class="btn" href="https://line.me/" target="_blank" rel="noopener noreferrer">สั่งซื้อผ่านแชท</a>
+            <a class="btn btn-secondary" href="tools.html">ขอคำแนะนำเลือกกลิ่น</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    PD AURUM SCENTS <span>— More than a scent, an identity</span>
+  </footer>
+
+</body>
+	</html>

@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PD AURUM SCENTS — AI Tools</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #080808;
+      --white: #f5f0e8;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gold-dim: #7a6030;
+      --gray: #1a1a1a;
+      --gray2: #2a2a2a;
+      --text-muted: #888;
+      --danger: #e88;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* GRAIN OVERLAY */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      border-bottom: 1px solid #222;
+      position: relative;
+    }
+
+    .brand-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      letter-spacing: 6px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 8vw, 72px);
+      font-weight: 300;
+      letter-spacing: 8px;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .brand-name span {
+      color: var(--gold);
+    }
+
+    .brand-tagline {
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--text-muted);
+      margin-top: 16px;
+      text-transform: uppercase;
+    }
+
+    .gold-line {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 20px auto 0;
+    }
+
+    /* NAV TABS */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      padding: 0 20px;
+      border-bottom: 1px solid #222;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 20px 28px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .tab-btn:hover {
+      color: var(--white);
+    }
+
+    .tab-btn.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    .tab-icon {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    /* PANELS */
+    .panel {
+      display: none;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 50px 24px;
+    }
+
+    .panel.active {
+      display: block;
+      animation: fadeUp 0.5s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .panel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 300;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .panel-title span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .panel-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+
+    /* FORM ELEMENTS */
+    .field-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    select,
+    input,
+    textarea {
+      width: 100%;
+      background: var(--gray);
+      border: 1px solid #333;
+      border-radius: 0;
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      padding: 14px 18px;
+      outline: none;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    select:focus,
+    input:focus,
+    textarea:focus {
+      border-color: var(--gold);
+    }
+
+    select option {
+      background: var(--gray);
+      color: var(--white);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 500px) {
+      .row-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* BUTTON */
+    .btn-gold {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-gold::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateX(-100%);
+      transition: transform 0.3s;
+      z-index: 0;
+    }
+
+    .btn-gold:hover::before {
+      transform: translateX(0);
+    }
+
+    .btn-gold:hover {
+      color: var(--black);
+    }
+
+    .btn-gold span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-gold:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* RESULT CARD */
+    .result-card {
+      background: var(--gray);
+      border: 1px solid #333;
+      border-left: 3px solid var(--gold);
+      padding: 32px;
+      margin-top: 32px;
+      animation: fadeUp 0.4s ease;
+      display: none;
+    }
+
+    .result-card.show {
+      display: block;
+    }
+
+    .result-label {
+      font-size: 9px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .result-content {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--white);
+    }
+
+    .result-content p {
+      margin-bottom: 12px;
+    }
+
+    .result-content strong {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .copy-btn {
+      background: none;
+      border: 1px solid #444;
+      color: var(--text-muted);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s;
+      text-transform: uppercase;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* LOADING */
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .loading.show {
+      display: block;
+    }
+
+    .loading-dots::after {
+      content: "";
+      animation: dots 1.5s infinite;
+    }
+
+    @keyframes dots {
+      0% {
+        content: "";
+      }
+      33% {
+        content: ".";
+      }
+      66% {
+        content: "..";
+      }
+      100% {
+        content: "...";
+      }
+    }
+
+    /* SCENT CARDS */
+    .scent-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 500px) {
+      .scent-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .scent-card {
+      background: var(--gray);
+      border: 1px solid #333;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .scent-card:hover,
+    .scent-card.selected {
+      border-color: var(--gold);
+      background: #1f1a0e;
+    }
+
+    .scent-card.selected::after {
+      content: "✓";
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      color: var(--gold);
+      font-size: 12px;
+    }
+
+    .scent-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .scent-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .scent-price {
+      font-size: 11px;
+      color: var(--white);
+      margin-top: 8px;
+      letter-spacing: 1px;
+    }
+
+    /* STEPS */
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .step {
+      width: 28px;
+      height: 28px;
+      border: 1px solid #444;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--text-muted);
+      font-family: 'Cormorant Garamond', serif;
+      transition: all 0.3s;
+    }
+
+    .step.active {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .step.done {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    .step-line {
+      flex: 1;
+      height: 1px;
+      background: #333;
+    }
+
+    /* GIFT CARD PREVIEW */
+    .gift-card-preview {
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1200 50%, #0d0d0d 100%);
+      border: 1px solid var(--gold-dim);
+      padding: 40px 32px;
+      margin-top: 32px;
+      text-align: center;
+      position: relative;
+      display: none;
+      animation: fadeUp 0.4s ease;
+    }
+
+    .gift-card-preview.show {
+      display: block;
+    }
+
+    .gift-card-preview::before,
+    .gift-card-preview::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      border: 1px solid #2a2000;
+      pointer-events: none;
+    }
+
+    .gift-card-preview::after {
+      top: 4px;
+      left: 4px;
+      right: 4px;
+      bottom: 4px;
+      border-color: #1a1500;
+    }
+
+    .gift-brand {
+      font-size: 9px;
+      letter-spacing: 6px;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .gift-ornament {
+      color: var(--gold);
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .gift-message {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--white);
+      white-space: pre-wrap;
+    }
+
+    .gift-sign {
+      margin-top: 24px;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    /* CONTENT TAGS */
+    .content-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      background: none;
+      border: 1px solid #444;
+      color: var(--text-muted);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .tag.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: #1a1500;
+    }
+
+    /* API KEY */
+    .api-section {
+      background: var(--gray);
+      border: 1px solid #333;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+
+    .api-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid #1a1a1a;
+      color: #444;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    footer span {
+      color: var(--gold-dim);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-eyebrow">AI Marketing Suite</div>
+    <div class="brand-name">PD <span>AURUM</span> SCENTS</div>
+    <div class="brand-tagline">More than a scent — an identity</div>
+    <div class="gold-line"></div>
+  </header>
+
+  <nav aria-label="AI tools navigation">
+    <button type="button" class="tab-btn active" onclick="switchTab('finder', this)">
+      <span class="tab-icon">✦</span>Scent Finder
+    </button>
+    <button type="button" class="tab-btn" onclick="switchTab('card', this)">
+      <span class="tab-icon">✉</span>Gift Card
+    </button>
+    <button type="button" class="tab-btn" onclick="switchTab('content', this)">
+      <span class="tab-icon">◈</span>FB Content
+    </button>
+    <button type="button" class="tab-btn" onclick="switchTab('setup', this)">
+      <span class="tab-icon">⚙</span>Setup
+    </button>
+  </nav>
+
+  <!-- ===== SETUP PANEL ===== -->
+  <div class="panel" id="panel-setup">
+    <div class="panel-title">API <span>Setup</span></div>
+    <div class="panel-sub">ตั้งค่าครั้งเดียว ใช้ได้ทุกเครื่องมือ</div>
+
+    <div class="api-section">
+      <label for="api-key-input">Anthropic API Key</label>
+      <input type="password" id="api-key-input" placeholder="sk-ant-..." oninput="saveKey()" />
+      <div class="api-note">
+        🔐 Key ถูกเก็บไว้ใน browser ของคุณเท่านั้น ไม่มีการส่งไปที่อื่น<br />
+        รับ API Key ได้ที่ <strong style="color: var(--gold)">console.anthropic.com</strong>
+      </div>
+    </div>
+
+    <div class="api-section">
+      <div class="result-label">Status</div>
+      <div id="key-status" style="font-size:13px; color: var(--text-muted)">ยังไม่ได้ใส่ API Key</div>
+    </div>
+  </div>
+
+  <!-- ===== SCENT FINDER PANEL ===== -->
+  <div class="panel active" id="panel-finder">
+    <div class="panel-title">Scent <span>Finder</span></div>
+    <div class="panel-sub">AI แนะนำกลิ่นที่ใช่ — ภายใน 3 คำถาม</div>
+
+    <div class="step-indicator">
+      <div class="step active" id="step1">1</div>
+      <div class="step-line"></div>
+      <div class="step" id="step2">2</div>
+      <div class="step-line"></div>
+      <div class="step" id="step3">3</div>
+    </div>
+
+    <!-- Step 1 -->
+    <div id="finder-step1">
+      <div class="field-group">
+        <label for="recipient-gender">ซื้อให้ใคร? / Who is this for?</label>
+        <div class="row-2">
+          <select id="recipient-gender">
+            <option value="">เพศผู้รับ / Gender</option>
+            <option value="male">ผู้ชาย / Male</option>
+            <option value="female">ผู้หญิง / Female</option>
+            <option value="any">ไม่จำกัด / Any</option>
+          </select>
+          <select id="recipient-age">
+            <option value="">อายุโดยประมาณ / Age</option>
+            <option value="teen">10–20 ปี</option>
+            <option value="young">20–30 ปี</option>
+            <option value="adult">30–45 ปี</option>
+            <option value="senior">45+ ปี</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="occasion">โอกาสพิเศษ / Occasion</label>
+        <select id="occasion">
+          <option value="">เลือกโอกาส</option>
+          <option value="birthday">วันเกิด / Birthday</option>
+          <option value="valentine">วาเลนไทน์ / Valentine's</option>
+          <option value="new-year">ปีใหม่ / New Year</option>
+          <option value="graduation">จบการศึกษา / Graduation</option>
+          <option value="anniversary">ครบรอบ / Anniversary</option>
+          <option value="thank-you">ขอบคุณ / Thank You</option>
+          <option value="just-because">ไม่มีเหตุผล / Just Because</option>
+          <option value="home-gift">ของฝากบ้าน / Housewarming</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label for="personality">บุคลิกของผู้รับ / Their personality</label>
+        <select id="personality">
+          <option value="">เลือกบุคลิก</option>
+          <option value="confident">มั่นใจ มีเสน่ห์ / Confident & Charming</option>
+          <option value="sweet">หวาน น่ารัก / Sweet & Lovely</option>
+          <option value="calm">สงบ ผ่อนคลาย / Calm & Relaxed</option>
+          <option value="lucky">มงคล โชคดี / Lucky & Prosperous</option>
+          <option value="elegant">หรูหรา มีระดับ / Elegant & Refined</option>
+        </select>
+      </div>
+
+      <button type="button" class="btn-gold" onclick="finderNext()"><span>ถัดไป / Next →</span></button>
+    </div>
+
+    <!-- Step 2 -->
+    <div id="finder-step2" style="display:none">
+      <div class="field-group">
+        <label for="budget">งบประมาณ / Budget</label>
+        <select id="budget">
+          <option value="190">190 บาท (น้ำหอม 10ml)</option>
+          <option value="390">390 บาท (น้ำหอม 30ml)</option>
+          <option value="890">890 บาท (Gift Set Diffuser)</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label for="usage">จะใช้ที่ไหน? / Where will they use it?</label>
+        <select id="usage">
+          <option value="personal">พกติดตัว / Personal wear</option>
+          <option value="home">ในบ้าน / At home</option>
+          <option value="office">ที่ทำงาน / Office</option>
+          <option value="hotel">โรงแรม / Hotel lobby</option>
+        </select>
+      </div>
+
+      <div style="display:flex; gap:12px">
+        <button type="button" class="btn-gold" style="flex:0 0 auto; width:auto; padding:18px 24px" onclick="finderBack()"><span>← Back</span></button>
+        <button type="button" class="btn-gold" onclick="runScentFinder()"><span>✦ ค้นหากลิ่นที่ใช่ / Find My Scent</span></button>
+      </div>
+    </div>
+
+    <div class="loading" id="finder-loading">
+      <div>✦ AI กำลังวิเคราะห์ <span class="loading-dots"></span></div>
+    </div>
+
+    <div class="result-card" id="finder-result">
+      <div class="result-label">✦ คำแนะนำจาก AI / AI Recommendation</div>
+      <div class="result-content" id="finder-result-content"></div>
+      <button type="button" class="copy-btn" onclick="copyResult('finder-result-content')">Copy Result</button>
+    </div>
+  </div>
+
+  <!-- ===== GIFT CARD PANEL ===== -->
+  <div class="panel" id="panel-card">
+    <div class="panel-title">Gift <span>Card</span> AI</div>
+    <div class="panel-sub">สร้างการ์ดของขวัญส่วนตัว ในไม่กี่วินาที</div>
+
+    <div class="row-2">
+      <div class="field-group">
+        <label for="card-from">ชื่อผู้ส่ง / From</label>
+        <input type="text" id="card-from" placeholder="ชื่อคุณ" />
+      </div>
+      <div class="field-group">
+        <label for="card-to">ชื่อผู้รับ / To</label>
+        <input type="text" id="card-to" placeholder="ชื่อผู้รับ" />
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label for="card-relation">ความสัมพันธ์ / Relationship</label>
+      <select id="card-relation">
+        <option value="แฟน">แฟน / Partner</option>
+        <option value="แม่">แม่ / Mother</option>
+        <option value="พ่อ">พ่อ / Father</option>
+        <option value="เพื่อนสนิท">เพื่อนสนิท / Best Friend</option>
+        <option value="พี่/น้อง">พี่/น้อง / Sibling</option>
+        <option value="หัวหน้า">หัวหน้า / Boss</option>
+        <option value="ลูกค้า">ลูกค้า / Client</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label for="card-occasion">โอกาสพิเศษ / Occasion</label>
+      <select id="card-occasion">
+        <option value="วันเกิด">วันเกิด / Birthday</option>
+        <option value="วาเลนไทน์">วาเลนไทน์ / Valentine's</option>
+        <option value="ปีใหม่">ปีใหม่ / New Year</option>
+        <option value="ครบรอบ">ครบรอบ / Anniversary</option>
+        <option value="ขอบคุณ">ขอบคุณ / Thank You</option>
+        <option value="ให้กำลังใจ">ให้กำลังใจ / Encouragement</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label for="card-product">สินค้าที่ให้ / Product gifted</label>
+      <select id="card-product">
+        <option value="DR.Savage — กลิ่นสดชื่น สุขุม มีเสน่ห์ 10ml">DR.Savage — กลิ่นสดชื่น สุขุม มีเสน่ห์</option>
+        <option value="CL.Very Good Diva — หอมหวาน สดใส น่ารัก 10ml">CL.Very Good Diva — หอมหวาน สดใส</option>
+        <option value="อักขระทอง — วนิลลาและไม้ เรียกทรัพย์ สิริมงคล 30ml">อักขระทอง — วนิลลาและไม้ เรียกทรัพย์</option>
+        <option value="Gift Set Diffuser — 3 กลิ่น ผ่อนคลาย">Gift Set Diffuser — 3 กลิ่นผ่อนคลาย</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label>โทน / Tone</label>
+      <div class="content-tags" id="card-tone-tags">
+        <button type="button" class="tag active" onclick="selectTag(this,'card-tone')">โรแมนติก</button>
+        <button type="button" class="tag" onclick="selectTag(this,'card-tone')">อบอุ่น</button>
+        <button type="button" class="tag" onclick="selectTag(this,'card-tone')">หรูหรา</button>
+        <button type="button" class="tag" onclick="selectTag(this,'card-tone')">ตลก/เล่นๆ</button>
+        <button type="button" class="tag" onclick="selectTag(this,'card-tone')">เป็นทางการ</button>
+      </div>
+    </div>
+
+    <button type="button" class="btn-gold" onclick="runGiftCard()"><span>✉ สร้างการ์ดของขวัญ / Generate Card</span></button>
+
+    <div class="loading" id="card-loading">
+      <div>✦ AI กำลังเขียนข้อความ <span class="loading-dots"></span></div>
+    </div>
+
+    <div class="gift-card-preview" id="gift-card-preview">
+      <div class="gift-brand">PD AURUM SCENTS</div>
+      <div class="gift-ornament">✦ ✦ ✦</div>
+      <div class="gift-message" id="gift-message-content"></div>
+      <div class="gift-sign" id="gift-sign-content"></div>
+    </div>
+
+    <button type="button" class="copy-btn" id="card-copy-btn" style="display:none; margin-top:20px" onclick="copyResult('gift-message-content')">Copy Card Message</button>
+  </div>
+
+  <!-- ===== FACEBOOK CONTENT PANEL ===== -->
+  <div class="panel" id="panel-content">
+    <div class="panel-title">Facebook <span>Content</span> AI</div>
+    <div class="panel-sub">สร้าง Caption & โพสต์ขาย ในสไตล์ PD AURUM SCENTS</div>
+
+    <div class="field-group">
+      <label>ประเภทโพสต์ / Post Type</label>
+      <div class="content-tags" id="post-type-tags">
+        <button type="button" class="tag active" onclick="selectTag(this,'post-type')">โพสต์ขาย</button>
+        <button type="button" class="tag" onclick="selectTag(this,'post-type')">แนะนำสินค้า</button>
+        <button type="button" class="tag" onclick="selectTag(this,'post-type')">โพสต์เทศกาล</button>
+        <button type="button" class="tag" onclick="selectTag(this,'post-type')">รีวิวลูกค้า</button>
+        <button type="button" class="tag" onclick="selectTag(this,'post-type')">Story/Reel Caption</button>
+        <button type="button" class="tag" onclick="selectTag(this,'post-type')">โปรโมชั่น</button>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label for="content-product">สินค้าที่ต้องการโฟกัส / Product focus</label>
+      <select id="content-product">
+        <option value="all">ทุกสินค้า / All Products</option>
+        <option value="dr-savage">DR.Savage — กลิ่นผู้ชาย</option>
+        <option value="diva">CL.Very Good Diva — กลิ่นผู้หญิง</option>
+        <option value="akhara">อักขระทอง — กลิ่นมงคล</option>
+        <option value="gift-set">Gift Set Diffuser</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label for="content-theme">เทศกาล/หัวข้อพิเศษ / Special topic (ถ้ามี)</label>
+      <input type="text" id="content-theme" placeholder="เช่น วันแม่, ส่งท้ายปีเก่า, โปรซื้อ1แถม1..." />
+    </div>
+
+    <div class="field-group">
+      <label>สไตล์การเขียน / Writing style</label>
+      <div class="content-tags" id="content-style-tags">
+        <button type="button" class="tag active" onclick="selectTag(this,'content-style')">Luxury & Elegant</button>
+        <button type="button" class="tag" onclick="selectTag(this,'content-style')">เป็นกันเอง</button>
+        <button type="button" class="tag" onclick="selectTag(this,'content-style')">กระตุ้นอารมณ์</button>
+        <button type="button" class="tag" onclick="selectTag(this,'content-style')">ตลก/มีมส์</button>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label for="content-count">จำนวน Caption / Variations</label>
+      <select id="content-count">
+        <option value="1">1 caption</option>
+        <option value="3" selected>3 captions (แนะนำ)</option>
+        <option value="5">5 captions</option>
+      </select>
+    </div>
+
+    <button type="button" class="btn-gold" onclick="runContentAI()"><span>◈ สร้าง Content / Generate Content</span></button>
+
+    <div class="loading" id="content-loading">
+      <div>✦ AI กำลังสร้าง Content <span class="loading-dots"></span></div>
+    </div>
+
+    <div class="result-card" id="content-result">
+      <div class="result-label">✦ Facebook Content โดย AI</div>
+      <div class="result-content" id="content-result-content"></div>
+      <button type="button" class="copy-btn" onclick="copyResult('content-result-content')">Copy All Content</button>
+    </div>
+  </div>
+
+  <footer>
+    Powered by <span>Claude AI</span> — Built for PD AURUM SCENTS
+  </footer>
+
+  <script>
+    // ===== STATE =====
+    let currentFinderStep = 1;
+    let selectedCardTone = 'โรแมนติก';
+    let selectedPostType = 'โพสต์ขาย';
+    let selectedContentStyle = 'Luxury & Elegant';
+
+    const PRODUCTS = {
+      'dr-savage': {
+        name: 'DR.Savage',
+        desc: 'กลิ่นสดชื่น สุขุม ดูมีเสน่ห์ มีจุดยืน',
+        size: '10ml',
+        price: '190 บาท',
+        target: 'ผู้ชาย'
+      },
+      'diva': {
+        name: 'CL.Very Good Diva',
+        desc: 'หอมหวาน สดใส น่ารัก มีเสน่ห์ที่แตกต่าง',
+        size: '10ml',
+        price: '190 บาท',
+        target: 'ผู้หญิง'
+      },
+      'akhara': {
+        name: 'อักขระทอง',
+        desc: 'วนิลลาผสมไม้อ่อน เรียกทรัพย์ สิริมงคล ลูกค้ารัก ชีวิตราบรื่น',
+        size: '30ml',
+        price: '390 บาท',
+        target: 'ทุกเพศ'
+      },
+      'gift-set': {
+        name: 'Gift Set Diffuser',
+        desc: '3 กลิ่นในหนึ่งเซต ผ่อนคลาย สบายใจ เหมาะห้องนอน ห้องพัก โรงแรม',
+        size: '3-in-1 Set',
+        price: '890 บาท',
+        target: 'ทุกเพศ'
+      }
+    };
+
+    // ===== KEY MANAGEMENT =====
+    function saveKey() {
+      const keyInput = document.getElementById('api-key-input');
+      const key = keyInput ? keyInput.value.trim() : '';
+      localStorage.setItem('pd_aurum_key', key);
+      updateKeyStatus();
+    }
+
+    function getKey() {
+      const stored = localStorage.getItem('pd_aurum_key');
+      if (stored) return stored.trim();
+      const keyInput = document.getElementById('api-key-input');
+      return keyInput ? keyInput.value.trim() : '';
+    }
+
+    function updateKeyStatus() {
+      const key = getKey();
+      const el = document.getElementById('key-status');
+      if (!el) return;
+
+      if (key && key.startsWith('sk-ant-')) {
+        el.innerHTML = '<span style="color: var(--gold)">✓ API Key พร้อมใช้งาน</span>';
+      } else if (key) {
+        el.innerHTML = '<span style="color: var(--danger)">✗ API Key ไม่ถูกต้อง (ต้องขึ้นต้นด้วย sk-ant-)</span>';
+      } else {
+        el.textContent = 'ยังไม่ได้ใส่ API Key';
+      }
+    }
+
+    // ===== TAB SWITCHING =====
+    function switchTab(tab, el) {
+      document.querySelectorAll('.panel').forEach((p) => {
+        p.classList.remove('active');
+        p.style.display = 'none';
+      });
+
+      document.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('active'));
+
+      const targetPanel = document.getElementById('panel-' + tab);
+      if (!targetPanel) return;
+
+      targetPanel.style.display = 'block';
+      targetPanel.classList.add('active');
+
+      if (el) el.classList.add('active');
+    }
+
+    // ===== TAG SELECTION =====
+    function selectTag(el, group) {
+      if (!el) return;
+      const parent = el.closest('.content-tags');
+      if (!parent) return;
+
+      parent.querySelectorAll('.tag').forEach((t) => t.classList.remove('active'));
+      el.classList.add('active');
+
+      const text = el.textContent.trim();
+      if (group === 'card-tone') selectedCardTone = text;
+      if (group === 'post-type') selectedPostType = text;
+      if (group === 'content-style') selectedContentStyle = text;
+    }
+
+    // ===== FINDER STEPS =====
+    function finderNext() {
+      const gender = document.getElementById('recipient-gender').value;
+      const age = document.getElementById('recipient-age').value;
+      const occasion = document.getElementById('occasion').value;
+
+      if (!gender || !age || !occasion) {
+        alert('กรุณากรอกข้อมูลให้ครบก่อนนะครับ');
+        return;
+      }
+
+      document.getElementById('finder-step1').style.display = 'none';
+      document.getElementById('finder-step2').style.display = 'block';
+
+      const step1 = document.getElementById('step1');
+      const step2 = document.getElementById('step2');
+      const step3 = document.getElementById('step3');
+
+      step1.classList.remove('active');
+      step1.classList.add('done');
+      step1.textContent = '✓';
+
+      step2.classList.add('active');
+      step2.classList.remove('done');
+
+      step3.classList.remove('active', 'done');
+      step3.textContent = '3';
+
+      currentFinderStep = 2;
+    }
+
+    function finderBack() {
+      document.getElementById('finder-step2').style.display = 'none';
+      document.getElementById('finder-step1').style.display = 'block';
+      document.getElementById('finder-loading').classList.remove('show');
+      document.getElementById('finder-result').classList.remove('show');
+
+      const step1 = document.getElementById('step1');
+      const step2 = document.getElementById('step2');
+      const step3 = document.getElementById('step3');
+
+      step1.classList.add('active');
+      step1.classList.remove('done');
+      step1.textContent = '1';
+
+      step2.classList.remove('active', 'done');
+      step2.textContent = '2';
+
+      step3.classList.remove('active', 'done');
+      step3.textContent = '3';
+
+      currentFinderStep = 1;
+    }
+
+    // ===== API CALL =====
+    async function callClaude(prompt, systemPrompt) {
+      const key = getKey();
+
+      if (!key) {
+        return 'ERROR_NO_KEY';
+      }
+
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': key,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: systemPrompt,
+          messages: [{ role: 'user', content: prompt }]
+        })
+      });
+
+      let data = {};
+      try {
+        data = await res.json();
+      } catch (err) {
+        throw new Error('ไม่สามารถอ่านผลลัพธ์จาก API ได้');
+      }
+
+      if (!res.ok || data.error) {
+        throw new Error(data?.error?.message || 'เกิดข้อผิดพลาดจาก API');
+      }
+
+      if (!data.content || !data.content.length || !data.content[0].text) {
+        throw new Error('ไม่ได้รับข้อความตอบกลับจาก Claude');
+      }
+
+      return data.content[0].text;
+    }
+
+    // Demo responses
+    const DEMO_FINDER =
+      '<strong>✦ แนะนำ: DR.Savage — 190 บาท</strong><br><br>กลิ่นนี้ถูกสร้างมาสำหรับคนที่รู้ว่าตัวเองเป็นใคร สดชื่น สุขุม และมีเสน่ห์โดยไม่ต้องพยายาม<br><br><strong>ข้อความตอนมอบ:</strong> "กลิ่นนี้เลือกมาเพื่อเธอโดยเฉพาะ เพราะเธอมีเสน่ห์ที่ไม่ต้องอธิบาย"<br><br><em style="color:var(--gold-dim)">⚙ นี่คือ Demo — ใส่ API Key ที่แท็บ Setup เพื่อรับคำแนะนำจาก AI จริงๆ</em>';
+
+    const DEMO_CARD =
+      'ถึงคนพิเศษ\n\nในทุกกลิ่นหอมที่ลอยผ่านมา\nมีความรู้สึกที่คำพูดไม่อาจบรรยายได้\nเหมือนกับความรู้สึกที่ฉันมีต่อเธอ\n\nขอให้กลิ่นนี้เป็นตัวแทนของทุกสิ่งที่อยากบอก\n\n— Demo Mode: ใส่ API Key เพื่อสร้างการ์ดส่วนตัวจริงๆ';
+
+    const DEMO_CONTENT =
+      '<strong>📌 Caption 1</strong><br>กลิ่นคือความทรงจำที่ลืมไม่ได้ 🖤<br>DR.Savage — ไม่ใช่แค่น้ำหอม แต่คือตัวตนที่คุณเลือกจะเป็น<br>✦ 10ml | 190 บาท<br>#PDaurumscents #DrSavage<br><br><strong>📌 Caption 2</strong><br>อักขระทอง — กลิ่นที่มากกว่าความหอม ✨<br>วนิลลานุ่มนวล เรียกทรัพย์ ชีวิตราบรื่น<br>#อักขระทอง #PDaurum<br><br><em style="color:var(--gold-dim)">⚙ Demo Mode — ใส่ API Key ที่แท็บ Setup เพื่อสร้าง Content จริงๆ</em>';
+
+    function showNoKeyBanner(resultId, demoContent) {
+      const target = document.getElementById(resultId);
+      if (target) target.innerHTML = demoContent;
+    }
+
+    // ===== SAFE FORMATTER =====
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function formatText(text) {
+      const escaped = escapeHtml(text);
+      return escaped
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>')
+        .replace(/^/, '<p>')
+        .replace(/$/, '</p>');
+    }
+
+    // ===== SCENT FINDER AI =====
+    async function runScentFinder() {
+      const key = getKey();
+      const isDemo = !key || !key.startsWith('sk-ant-');
+
+      const gender = document.getElementById('recipient-gender').value;
+      const age = document.getElementById('recipient-age').value;
+      const occasion = document.getElementById('occasion').value;
+      const personality = document.getElementById('personality').value;
+      const budget = document.getElementById('budget').value;
+      const usage = document.getElementById('usage').value;
+
+      document.getElementById('finder-step2').style.display = 'none';
+      document.getElementById('finder-loading').classList.add('show');
+      document.getElementById('finder-result').classList.remove('show');
+
+      if (isDemo) {
+        setTimeout(() => {
+          document.getElementById('finder-loading').classList.remove('show');
+          document.getElementById('finder-result').classList.add('show');
+          showNoKeyBanner('finder-result-content', DEMO_FINDER);
+
+          const step2 = document.getElementById('step2');
+          const step3 = document.getElementById('step3');
+          step2.classList.remove('active');
+          step2.classList.add('done');
+          step2.textContent = '✓';
+          step3.classList.add('active');
+        }, 1200);
+        return;
+      }
+
+      const system = `คุณเป็น Scent Consultant ของแบรนด์ PD AURUM SCENTS แบรนด์น้ำหอมไทยที่สร้างเอกลักษณ์ให้น้ำหอมแต่ละกลิ่น ให้ความรู้สึกที่มากกว่าการดมทดลอง
+
+สินค้าทั้งหมด:
+1. DR.Savage — กลิ่นสดชื่น สุขุม ดูมีเสน่ห์ มีจุดยืน เหมาะผู้ชาย 10ml ราคา 190 บาท
+2. CL.Very Good Diva — หอมหวาน สดใส น่ารัก มีเสน่ห์ที่แตกต่าง เหมาะผู้หญิง 10ml ราคา 190 บาท
+3. อักขระทอง — วนิลลาผสมไม้อ่อน เป็นสิริมงคล เรียกทรัพย์ ลูกค้ารัก ชีวิตราบรื่น 30ml ราคา 390 บาท
+4. Gift Set Diffuser — 3 กลิ่นในเซต ผ่อนคลาย สบายใจ ใช้ในบ้าน โรงแรม ห้องนอน ราคา 890 บาท
+
+ตอบเป็นภาษาไทย-อังกฤษสลับกัน สั้น กระชับ มีเสน่ห์ ให้ความรู้สึก luxury ใช้ emoji น้อยๆ`;
+
+      const prompt = `ลูกค้าต้องการซื้อน้ำหอมเป็นของขวัญให้:
+- ผู้รับ: ${gender}, อายุ ${age}
+- โอกาส: ${occasion}
+- บุคลิก: ${personality}
+- งบประมาณ: ${budget} บาท
+- การใช้งาน: ${usage}
+
+แนะนำสินค้าที่เหมาะที่สุด 1-2 ชิ้น พร้อมเหตุผลที่น่าสนใจ บอกวิธีจะทำให้ผู้รับประทับใจ และข้อความสั้นๆ ที่สามารถพูดตอนมอบของขวัญ`;
+
+      try {
+        const result = await callClaude(prompt, system);
+        document.getElementById('finder-loading').classList.remove('show');
+        document.getElementById('finder-result').classList.add('show');
+        document.getElementById('finder-result-content').innerHTML = formatText(result);
+
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+
+        step2.classList.remove('active');
+        step2.classList.add('done');
+        step2.textContent = '✓';
+        step3.classList.add('active');
+      } catch (e) {
+        document.getElementById('finder-loading').classList.remove('show');
+        document.getElementById('finder-step2').style.display = 'block';
+        alert('เกิดข้อผิดพลาด: ' + e.message);
+      }
+    }
+
+    // ===== GIFT CARD AI =====
+    async function runGiftCard() {
+      const key = getKey();
+      const isDemo = !key || !key.startsWith('sk-ant-');
+
+      const from = document.getElementById('card-from').value.trim() || 'ผู้ส่ง';
+      const to = document.getElementById('card-to').value.trim() || 'ผู้รับ';
+      const relation = document.getElementById('card-relation').value;
+      const occasion = document.getElementById('card-occasion').value;
+      const product = document.getElementById('card-product').value;
+      const tone = selectedCardTone;
+
+      document.getElementById('card-loading').classList.add('show');
+      document.getElementById('gift-card-preview').classList.remove('show');
+      document.getElementById('card-copy-btn').style.display = 'none';
+
+      if (isDemo) {
+        setTimeout(() => {
+          document.getElementById('card-loading').classList.remove('show');
+          document.getElementById('gift-message-content').textContent = DEMO_CARD;
+          document.getElementById('gift-sign-content').textContent = `— ${from} (Demo)`;
+          document.getElementById('gift-card-preview').classList.add('show');
+          document.getElementById('card-copy-btn').style.display = 'inline-block';
+        }, 1000);
+        return;
+      }
+
+      const system = `คุณเป็น Copywriter หัวใจอ่อนของ PD AURUM SCENTS เขียนข้อความในการ์ดของขวัญที่ทำให้คนรู้สึกพิเศษ มีคุณค่า และจดจำได้ตลอดไป
+สไตล์การเขียน: กระทัดรัด มีความหมายลึก ไม่ยาวเกินไป ทำให้ผู้รับรู้สึกว่าน้ำหอมนี้ถูกเลือกมาเพื่อเขา/เธอโดยเฉพาะ
+ตอบเป็นข้อความการ์ดเท่านั้น ไม่ต้องมีคำอธิบายอื่น ยาวประมาณ 3-5 บรรทัด`;
+
+      const prompt = `สร้างข้อความในการ์ดของขวัญ:
+- จาก: ${from} (เป็น${relation}ของผู้รับ)
+- ถึง: ${to}
+- โอกาส: ${occasion}
+- สินค้า: ${product}
+- โทน: ${tone}
+
+เขียนข้อความที่ทำให้ผู้รับรู้สึกพิเศษ เชื่อมโยงความรู้สึกกับกลิ่นที่ได้รับ`;
+
+      try {
+        const result = await callClaude(prompt, system);
+        document.getElementById('card-loading').classList.remove('show');
+        document.getElementById('gift-message-content').textContent = result;
+        document.getElementById('gift-sign-content').textContent = `— ${from}`;
+        document.getElementById('gift-card-preview').classList.add('show');
+        document.getElementById('card-copy-btn').style.display = 'inline-block';
+      } catch (e) {
+        document.getElementById('card-loading').classList.remove('show');
+        alert('เกิดข้อผิดพลาด: ' + e.message);
+      }
+    }
+
+    // ===== CONTENT AI =====
+    async function runContentAI() {
+      const key = getKey();
+      const isDemo = !key || !key.startsWith('sk-ant-');
+
+      const postType = selectedPostType;
+      const productKey = document.getElementById('content-product').value;
+      const theme = document.getElementById('content-theme').value.trim();
+      const style = selectedContentStyle;
+      const count = document.getElementById('content-count').value;
+
+      let productInfo = 'ทุกสินค้าของ PD AURUM SCENTS';
+      if (productKey !== 'all' && PRODUCTS[productKey]) {
+        const p = PRODUCTS[productKey];
+        productInfo = `${p.name} — ${p.desc} — ${p.size} ราคา ${p.price}`;
+      }
+
+      document.getElementById('content-loading').classList.add('show');
+      document.getElementById('content-result').classList.remove('show');
+
+      if (isDemo) {
+        setTimeout(() => {
+          document.getElementById('content-loading').classList.remove('show');
+          document.getElementById('content-result').classList.add('show');
+          document.getElementById('content-result-content').innerHTML = DEMO_CONTENT;
+        }, 1200);
+        return;
+      }
+
+      const system = `คุณเป็น Social Media Manager ของ PD AURUM SCENTS แบรนด์น้ำหอมไทยที่มีเอกลักษณ์เฉพาะตัว
+แนวทางการสื่อสาร: สร้างความรู้สึกมากกว่าการขาย ทำให้คนอยากมีน้ำหอมนี้ไว้คู่ตัว ไม่ใช่แค่ดมทดลองหน้าร้าน
+Brand Voice: มั่นใจ มีเสน่ห์ luxury แต่เข้าถึงได้ พูดถึงความรู้สึกและอัตลักษณ์ของผู้ใช้
+สินค้า: DR.Savage 190฿/10ml, CL.Very Good Diva 190฿/10ml, อักขระทอง 390฿/30ml, Gift Set Diffuser 890฿
+ตอบเป็นภาษาไทย ใส่ hashtag ที่เหมาะสม แบ่งแต่ละ caption ชัดเจน`;
+
+      const prompt = `สร้าง Facebook ${postType} จำนวน ${count} แบบ
+สินค้าที่โฟกัส: ${productInfo}
+${theme ? `หัวข้อ/เทศกาล: ${theme}` : ''}
+สไตล์: ${style}
+
+แต่ละ caption ให้มี: hook ที่ดึงดูด, เนื้อหาหลัก, call-to-action, hashtag`;
+
+      try {
+        const result = await callClaude(prompt, system);
+        document.getElementById('content-loading').classList.remove('show');
+        document.getElementById('content-result').classList.add('show');
+        document.getElementById('content-result-content').innerHTML = formatText(result);
+      } catch (e) {
+        document.getElementById('content-loading').classList.remove('show');
+        alert('เกิดข้อผิดพลาด: ' + e.message);
+      }
+    }
+
+    // ===== COPY =====
+    async function copyResult(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const text = el.innerText || el.textContent || '';
+      let copied = false;
+
+      try {
+        await navigator.clipboard.writeText(text);
+        copied = true;
+      } catch (err) {
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        try {
+          copied = document.execCommand('copy');
+        } catch (e) {
+          copied = false;
+        }
+        document.body.removeChild(temp);
+      }
+
+      const btn =
+        (el.parentElement && el.parentElement.querySelector('.copy-btn')) ||
+        document.getElementById('card-copy-btn');
+
+      if (btn && copied) {
+        const orig = btn.textContent;
+        btn.textContent = '✓ Copied!';
+        setTimeout(() => {
+          btn.textContent = orig;
+        }, 2000);
+      } else if (!copied) {
+        alert('คัดลอกไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
+      }
+    }
+
+    // ===== INIT =====
+    window.onload = () => {
+      const saved = localStorage.getItem('pd_aurum_key');
+      const input = document.getElementById('api-key-input');
+      if (saved && input) {
+        input.value = saved;
+      }
+      updateKeyStatus();
+      switchTab('finder', document.querySelector('.tab-btn.active'));
+    };
+  </script>
+</body>
+</html>
