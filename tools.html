@@ -1109,7 +1109,7 @@
       '<strong>✦ แนะนำ: DR.Savage — 190 บาท</strong><br><br>กลิ่นนี้ถูกสร้างมาสำหรับคนที่รู้ว่าตัวเองเป็นใคร สดชื่น สุขุม และมีเสน่ห์โดยไม่ต้องพยายาม<br><br><strong>ข้อความตอนมอบ:</strong> "กลิ่นนี้เลือกมาเพื่อเธอโดยเฉพาะ เพราะเธอมีเสน่ห์ที่ไม่ต้องอธิบาย"<br><br><em style="color:var(--gold-dim)">⚙ นี่คือ Demo — ใส่ API Key ที่แท็บ Setup เพื่อรับคำแนะนำจาก AI จริงๆ</em>';
 
     const DEMO_CARD =
-      'ถึงคนพิเศษ\n\nในทุกกลิ่นหอมที่ลอยผ่านมา\nมีความรู้สึกที่คำพูดไม่อาจบรรยายได้\nเหมือนกับความรู้สึกที่ฉันมีต่อเธอ\n\nขอให้กลิ่นนี้เป็นตัวแทนของทุกสิ่งที่อยากบอก\n\n— Demo Mode: ใส่ API Key เพื่อสร้างการ์ดส่วนตัวจริงๆ';
+      'ถึงคนพิเศษ\n\nในทุกกลิ่นหอมที่ลอยผ่านมา\nมีความรู้สึกที่คำพูดไม่อาจบรรยายได้\nเหมือนกับความรู้สึกที่ฉันมีต่อเธอ\n\nขอให้กลิ่นนี้เป็นตัวแทนของทุกสิ่งที่อยากบอก';
 
     const DEMO_CONTENT =
       '<strong>📌 Caption 1</strong><br>กลิ่นคือความทรงจำที่ลืมไม่ได้ 🖤<br>DR.Savage — ไม่ใช่แค่น้ำหอม แต่คือตัวตนที่คุณเลือกจะเป็น<br>✦ 10ml | 190 บาท<br>#PDaurumscents #DrSavage<br><br><strong>📌 Caption 2</strong><br>อักขระทอง — กลิ่นที่มากกว่าความหอม ✨<br>วนิลลานุ่มนวล เรียกทรัพย์ ชีวิตราบรื่น<br>#อักขระทอง #PDaurum<br><br><em style="color:var(--gold-dim)">⚙ Demo Mode — ใส่ API Key ที่แท็บ Setup เพื่อสร้าง Content จริงๆ</em>';
@@ -1231,7 +1231,7 @@
         setTimeout(() => {
           document.getElementById('card-loading').classList.remove('show');
           document.getElementById('gift-message-content').textContent = DEMO_CARD;
-          document.getElementById('gift-sign-content').textContent = `— ${from} (Demo)`;
+          document.getElementById('gift-sign-content').textContent = `— ${from}`;
           document.getElementById('gift-card-preview').classList.add('show');
           document.getElementById('card-copy-btn').style.display = 'inline-block';
         }, 1000);
