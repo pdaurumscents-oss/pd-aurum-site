@@ -1212,12 +1212,76 @@
     }
 
     // ===== GIFT CARD AI =====
-    async function runGiftCard() {
-      const key = getKey();
-      if (!key || !key.startsWith('sk-ant-')) {
-  alert('กรุณาใส่ API Key ในแท็บ Setup ก่อน');
-  return;
+    function generateLocalGiftCardMessage({ relation, occasion, product, tone }) {
+  const messages = {
+    'แฟน': {
+      'ครบรอบ': {
+        'โรแมนติก': 'ทุกช่วงเวลาที่มีเธออยู่ข้าง ๆ ทำให้วันธรรมดากลายเป็นวันที่พิเศษเสมอ\nขอให้ของขวัญชิ้นนี้เป็นตัวแทนของความรักและความทรงจำดี ๆ ของเรา',
+        'อบอุ่น': 'ขอบคุณที่อยู่เคียงข้างกันในทุกวัน\nขอให้ของขวัญชิ้นนี้แทนความห่วงใยและความรู้สึกดี ๆ ที่มีให้กันเสมอ',
+        'หรูหรา': 'ในวันพิเศษของเรา ขอมอบของขวัญชิ้นนี้แทนความรักที่เรียบง่ายแต่มีคุณค่า\nและความทรงจำที่งดงามของเราสองคน',
+        'ตลก/เล่นๆ': 'อยู่ด้วยกันมาครบอีกปีแล้วนะ\nของขวัญชิ้นนี้เอาไว้เตือนว่าเรายังต้องทนความน่ารักของกันและกันต่อไปอีกนาน',
+        'เป็นทางการ': 'เนื่องในโอกาสครบรอบ ขอส่งมอบของขวัญชิ้นนี้แทนความปรารถนาดี\nและความรู้สึกที่มีคุณค่าเสมอมา'
+      }
+    },
+    'หัวหน้า': {
+      'ขอบคุณ': {
+        'เป็นทางการ': 'ขอขอบพระคุณสำหรับโอกาส คำแนะนำ และการสนับสนุนที่มีให้เสมอ\nขอมอบของขวัญชิ้นนี้แทนความเคารพและความขอบคุณจากใจ',
+        'อบอุ่น': 'ขอบคุณสำหรับความไว้วางใจและคำแนะนำดี ๆ ที่มีให้เสมอ\nขอมอบของขวัญชิ้นนี้แทนความรู้สึกขอบคุณจากใจ',
+        'หรูหรา': 'ขอขอบพระคุณสำหรับการสนับสนุนและโอกาสที่มอบให้\nของขวัญชิ้นนี้เป็นเพียงคำขอบคุณเล็ก ๆ จากใจ',
+        'ตลก/เล่นๆ': 'ขอบคุณที่ทั้งสอนงานและทำให้ทุกวันมีอะไรให้เรียนรู้อยู่เสมอ\nขอมอบของขวัญชิ้นนี้แทนคำขอบคุณแบบจริงใจ',
+        'เป็นทางการ': 'ขอขอบพระคุณสำหรับโอกาส คำแนะนำ และการสนับสนุนที่มีให้เสมอ\nขอมอบของขวัญชิ้นนี้แทนความเคารพและความขอบคุณจากใจ'
+      }
+    },
+    'ลูกค้า': {
+      'ขอบคุณ': {
+        'เป็นทางการ': 'ขอขอบพระคุณสำหรับความไว้วางใจและการสนับสนุนที่มีให้เสมอ\nขอมอบของขวัญชิ้นนี้แทนคำขอบคุณและความปรารถนาดีจากใจ',
+        'อบอุ่น': 'ขอบคุณที่ไว้วางใจและสนับสนุนกันเสมอมา\nขอมอบของขวัญชิ้นนี้แทนความขอบคุณและความยินดีอย่างยิ่ง',
+        'หรูหรา': 'เพื่อแทนคำขอบคุณสำหรับความไว้วางใจที่มีให้\nขอมอบของขวัญชิ้นนี้ด้วยความยินดีและความปรารถนาดี',
+        'ตลก/เล่นๆ': 'ขอบคุณที่สนับสนุนกันมาตลอด\nหวังว่าของขวัญชิ้นนี้จะทำให้วันของคุณพิเศษขึ้นอีกนิด',
+        'เป็นทางการ': 'ขอขอบพระคุณสำหรับความไว้วางใจและการสนับสนุนที่มีให้เสมอ\nขอมอบของขวัญชิ้นนี้แทนคำขอบคุณและความปรารถนาดีจากใจ'
+      }
+    }
+  };
+
+  const defaultMessages = {
+    'โรแมนติก': 'ขอมอบของขวัญชิ้นนี้แทนความรู้สึกดี ๆ ที่อยากส่งต่อถึงคุณ\nหวังว่าจะทำให้วันพิเศษนี้มีความหมายยิ่งขึ้น',
+    'อบอุ่น': 'ขอมอบของขวัญชิ้นนี้แทนความห่วงใยและความปรารถนาดีจากใจ\nหวังว่าจะทำให้คุณยิ้มได้ในวันพิเศษนี้',
+    'หรูหรา': 'ขอมอบของขวัญชิ้นนี้แทนความตั้งใจและความรู้สึกดี ๆ ที่มีให้\nหวังว่าจะเป็นความประทับใจเล็ก ๆ ในวันพิเศษนี้',
+    'ตลก/เล่นๆ': 'ขอมอบของขวัญชิ้นนี้พร้อมรอยยิ้มและความตั้งใจดี ๆ\nหวังว่าจะเพิ่มความสดใสให้วันของคุณ',
+    'เป็นทางการ': 'ขอมอบของขวัญชิ้นนี้แทนความปรารถนาดีและความเคารพจากใจ\nหวังว่าจะสร้างความประทับใจในโอกาสนี้'
+  };
+
+  const relationSet = messages[relation];
+  const occasionSet = relationSet && relationSet[occasion];
+  const toneMessage = occasionSet && occasionSet[tone];
+
+  if (toneMessage) return toneMessage;
+  return defaultMessages[tone] || defaultMessages['อบอุ่น'];
 }
+async function runGiftCard() {
+  const key = getKey();
+
+  const from = document.getElementById('card-from').value.trim() || 'ผู้ส่ง';
+  const to = document.getElementById('card-to').value.trim() || 'ผู้รับ';
+  const relation = document.getElementById('card-relation').value;
+  const occasion = document.getElementById('card-occasion').value;
+  const product = document.getElementById('card-product').value;
+  const tone = selectedCardTone;
+
+  document.getElementById('card-loading').classList.add('show');
+  document.getElementById('gift-card-preview').classList.remove('show');
+  document.getElementById('card-copy-btn').style.display = 'none';
+
+  if (!key || !key.startsWith('sk-ant-')) {
+    const localMessage = generateLocalGiftCardMessage({ from, to, relation, occasion, product, tone });
+
+    document.getElementById('card-loading').classList.remove('show');
+    document.getElementById('gift-message-content').textContent = localMessage;
+    document.getElementById('gift-sign-content').textContent = `— ${from}`;
+    document.getElementById('gift-card-preview').classList.add('show');
+    document.getElementById('card-copy-btn').style.display = 'inline-block';
+    return;
+  }
       
 
       const from = document.getElementById('card-from').value.trim() || 'ผู้ส่ง';
