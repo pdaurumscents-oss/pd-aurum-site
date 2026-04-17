@@ -765,7 +765,9 @@
   <div class="panel" id="panel-card">
     <div class="panel-title">Gift <span>Card</span> AI</div>
     <div class="panel-sub">สร้างการ์ดของขวัญส่วนตัว ในไม่กี่วินาที</div>
-
+<div class="panel-sub" style="margin-top:6px; font-size:13px; opacity:0.7;">
+  กรอกชื่อ + เลือกความสัมพันธ์ + โอกาส + โทน แล้วกด “Generate Card”
+</div>
     <div class="row-2">
       <div class="field-group">
         <label for="card-from">ชื่อผู้ส่ง / From</label>
@@ -835,9 +837,16 @@
       <div class="gift-message" id="gift-message-content"></div>
       <div class="gift-sign" id="gift-sign-content"></div>
     </div>
+<button type="button" class="copy-btn" id="card-copy-btn" style="display:none; margin-top:20px;" onclick="copyGiftCard()">
+  Copy Card Message
+</button>
 
-    <button type="button" class="copy-btn" id="card-copy-btn" style="display:none; margin-top:20px" onclick="copyResult('gift-message-content')">Copy Card Message</button>
-  </div>
+<a href="https://www.facebook.com/profile.php?id=61574698212892"
+   target="_blank"
+   class="copy-btn"
+   style="display:inline-block; margin-left:10px; text-decoration:none;">
+   ติดต่อสั่งซื้อผ่านเพจ
+</a>
 
   <!-- ===== FACEBOOK CONTENT PANEL ===== -->
   <div class="panel" id="panel-content">
