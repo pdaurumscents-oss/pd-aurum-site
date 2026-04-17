@@ -1214,7 +1214,11 @@
     // ===== GIFT CARD AI =====
     async function runGiftCard() {
       const key = getKey();
-      const isDemo = !key || !key.startsWith('sk-ant-');
+      if (!key || !key.startsWith('sk-ant-')) {
+  
+  return;
+}
+      
 
       const from = document.getElementById('card-from').value.trim() || 'ผู้ส่ง';
       const to = document.getElementById('card-to').value.trim() || 'ผู้รับ';
@@ -1227,16 +1231,8 @@
       document.getElementById('gift-card-preview').classList.remove('show');
       document.getElementById('card-copy-btn').style.display = 'none';
 
-      if (isDemo) {
-        setTimeout(() => {
-          document.getElementById('card-loading').classList.remove('show');
-          document.getElementById('gift-message-content').textContent = DEMO_CARD;
-          document.getElementById('gift-sign-content').textContent = `— ${from}`;
-          document.getElementById('gift-card-preview').classList.add('show');
-          document.getElementById('card-copy-btn').style.display = 'inline-block';
-        }, 1000);
-        return;
-      }
+      
+
 
       const system = `คุณเป็น Copywriter หัวใจอ่อนของ PD AURUM SCENTS เขียนข้อความในการ์ดของขวัญที่ทำให้คนรู้สึกพิเศษ มีคุณค่า และจดจำได้ตลอดไป
 สไตล์การเขียน: กระทัดรัด มีความหมายลึก ไม่ยาวเกินไป ทำให้ผู้รับรู้สึกว่าน้ำหอมนี้ถูกเลือกมาเพื่อเขา/เธอโดยเฉพาะ
