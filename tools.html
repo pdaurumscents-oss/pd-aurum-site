@@ -37,7 +37,6 @@
       overflow-x: hidden;
     }
 
-    /* GRAIN OVERLAY */
     body::before {
       content: "";
       position: fixed;
@@ -48,7 +47,6 @@
       opacity: 0.4;
     }
 
-    /* HEADER */
     header {
       text-align: center;
       padding: 60px 20px 40px;
@@ -57,7 +55,6 @@
     }
 
     .brand-eyebrow {
-      font-family: 'Montserrat', sans-serif;
       font-size: 10px;
       letter-spacing: 6px;
       color: var(--gold);
@@ -93,7 +90,6 @@
       margin: 20px auto 0;
     }
 
-    /* NAV TABS */
     nav {
       display: flex;
       justify-content: center;
@@ -107,7 +103,6 @@
       background: none;
       border: none;
       color: var(--text-muted);
-      font-family: 'Montserrat', sans-serif;
       font-size: 10px;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -134,7 +129,6 @@
       margin-bottom: 6px;
     }
 
-    /* PANELS */
     .panel {
       display: none;
       max-width: 800px;
@@ -179,7 +173,6 @@
       text-transform: uppercase;
     }
 
-    /* FORM ELEMENTS */
     .field-group {
       margin-bottom: 24px;
     }
@@ -239,7 +232,6 @@
       }
     }
 
-    /* BUTTON */
     .btn-gold {
       width: 100%;
       background: transparent;
@@ -285,7 +277,6 @@
       cursor: not-allowed;
     }
 
-    /* RESULT CARD */
     .result-card {
       background: var(--gray);
       border: 1px solid #333;
@@ -344,7 +335,6 @@
       color: var(--gold);
     }
 
-    /* LOADING */
     .loading {
       display: none;
       text-align: center;
@@ -365,80 +355,12 @@
     }
 
     @keyframes dots {
-      0% {
-        content: "";
-      }
-      33% {
-        content: ".";
-      }
-      66% {
-        content: "..";
-      }
-      100% {
-        content: "...";
-      }
+      0% { content: ""; }
+      33% { content: "."; }
+      66% { content: ".."; }
+      100% { content: "..."; }
     }
 
-    /* SCENT CARDS */
-    .scent-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    @media (max-width: 500px) {
-      .scent-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .scent-card {
-      background: var(--gray);
-      border: 1px solid #333;
-      padding: 20px;
-      cursor: pointer;
-      transition: all 0.3s;
-      position: relative;
-    }
-
-    .scent-card:hover,
-    .scent-card.selected {
-      border-color: var(--gold);
-      background: #1f1a0e;
-    }
-
-    .scent-card.selected::after {
-      content: "✓";
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      color: var(--gold);
-      font-size: 12px;
-    }
-
-    .scent-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--gold);
-      margin-bottom: 4px;
-    }
-
-    .scent-desc {
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .scent-price {
-      font-size: 11px;
-      color: var(--white);
-      margin-top: 8px;
-      letter-spacing: 1px;
-    }
-
-    /* STEPS */
     .step-indicator {
       display: flex;
       align-items: center;
@@ -477,7 +399,6 @@
       background: #333;
     }
 
-    /* GIFT CARD PREVIEW */
     .gift-card-preview {
       background: linear-gradient(135deg, #0d0d0d 0%, #1a1200 50%, #0d0d0d 100%);
       border: 1px solid var(--gold-dim);
@@ -545,7 +466,6 @@
       text-transform: uppercase;
     }
 
-    /* CONTENT TAGS */
     .content-tags {
       display: flex;
       flex-wrap: wrap;
@@ -572,7 +492,6 @@
       background: #1a1500;
     }
 
-    /* API KEY */
     .api-section {
       background: var(--gray);
       border: 1px solid #333;
@@ -587,7 +506,27 @@
       line-height: 1.6;
     }
 
-    /* FOOTER */
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-row .btn-gold,
+    .btn-row .copy-btn,
+    .btn-row a.copy-btn {
+      width: auto;
+      flex: 1 1 auto;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .btn-row {
+        flex-direction: column;
+      }
+    }
+
     footer {
       text-align: center;
       padding: 40px 20px;
@@ -601,22 +540,9 @@
     footer span {
       color: var(--gold-dim);
     }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
   </style>
 </head>
 <body>
-
   <header>
     <div class="brand-eyebrow">AI Marketing Suite</div>
     <div class="brand-name">PD <span>AURUM</span> SCENTS</div>
@@ -639,7 +565,7 @@
     </button>
   </nav>
 
-  <!-- ===== SETUP PANEL ===== -->
+  <!-- SETUP -->
   <div class="panel" id="panel-setup">
     <div class="panel-title">API <span>Setup</span></div>
     <div class="panel-sub">ตั้งค่าครั้งเดียว ใช้ได้ทุกเครื่องมือ</div>
@@ -659,7 +585,7 @@
     </div>
   </div>
 
-  <!-- ===== SCENT FINDER PANEL ===== -->
+  <!-- FINDER -->
   <div class="panel active" id="panel-finder">
     <div class="panel-title">Scent <span>Finder</span></div>
     <div class="panel-sub">AI แนะนำกลิ่นที่ใช่ — ภายใน 3 คำถาม</div>
@@ -724,7 +650,7 @@
     </div>
 
     <!-- Step 2 -->
-    <div id="finder-step2" style="display:none">
+    <div id="finder-step2" style="display:none;">
       <div class="field-group">
         <label for="budget">งบประมาณ / Budget</label>
         <select id="budget">
@@ -744,40 +670,37 @@
         </select>
       </div>
 
-      <div style="display:flex; gap:12px">
-  <button type="button" class="btn-gold" style="flex:0 0 auto; width:auto; padding:18px 24px" onclick="finderBack()">
-    <span>← ย้อนกลับ / Back</span>
-  </button>
+      <div class="btn-row">
+        <button type="button" class="btn-gold" onclick="finderBack()"><span>← ย้อนกลับ / Back</span></button>
+        <button type="button" class="btn-gold" onclick="runScentFinder()"><span>✦ ค้นหากลิ่นที่ใช่ / Find Match</span></button>
+      </div>
+    </div>
 
-  <button type="button" class="btn-gold" onclick="runScentFinder()">
-    <span>✦ ค้นหากลิ่นที่ใช่ / Find Match</span>
-  </button>
-</div>
-    
+    <!-- Loading / Result must be OUTSIDE step2 -->
     <div class="loading" id="finder-loading">
       <div>✦ AI กำลังวิเคราะห์ <span class="loading-dots"></span></div>
     </div>
 
     <div class="result-card" id="finder-result">
-  <div class="result-label">✦ คำแนะนำจาก AI / AI Recommendation</div>
-  <div class="result-content" id="finder-result-content"></div>
+      <div class="result-label">✦ คำแนะนำจาก AI / AI Recommendation</div>
+      <div class="result-content" id="finder-result-content"></div>
 
-  <button type="button" class="copy-btn" onclick="copyResult('finder-result-content')">
-    Copy Result
-  </button>
+      <div class="btn-row" style="margin-top: 16px;">
+        <button type="button" class="copy-btn" onclick="copyResult('finder-result-content', this)">Copy Result</button>
+        <button type="button" class="copy-btn" onclick="finderBackToStep2()">← กลับไปแก้ / Back to Step 2</button>
+        <button type="button" class="copy-btn" onclick="finderBackToStart()">เริ่มใหม่ / Start Over</button>
+      </div>
+    </div>
+  </div>
 
-  <button type="button" class="copy-btn" onclick="finderBackToStart()" style="margin-left:10px;">
-    เริ่มใหม่ / Start Over
-  </button>
-</div>
-
-  <!-- ===== GIFT CARD PANEL ===== -->
+  <!-- GIFT CARD -->
   <div class="panel" id="panel-card">
     <div class="panel-title">Gift <span>Card</span> AI</div>
     <div class="panel-sub">สร้างการ์ดของขวัญส่วนตัว ในไม่กี่วินาที</div>
-<div class="panel-sub" style="margin-top:6px; font-size:13px; opacity:0.7;">
-  กรอกชื่อ + เลือกความสัมพันธ์ + โอกาส + โทน แล้วกด “Generate Card”
-</div>
+    <div class="panel-sub" style="margin-top:6px; font-size:13px; opacity:0.7;">
+      กรอกชื่อ + เลือกความสัมพันธ์ + โอกาส + โทน แล้วกด “Generate Card”
+    </div>
+
     <div class="row-2">
       <div class="field-group">
         <label for="card-from">ชื่อผู้ส่ง / From</label>
@@ -847,18 +770,16 @@
       <div class="gift-message" id="gift-message-content"></div>
       <div class="gift-sign" id="gift-sign-content"></div>
     </div>
-<button type="button" class="copy-btn" id="card-copy-btn" style="display:none; margin-top:20px;" onclick="copyGiftCard()">
-  Copy Card Message
-</button>
 
-<a href="https://www.facebook.com/profile.php?id=61574698212892"
-   target="_blank"
-   class="copy-btn"
-   style="display:inline-block; margin-left:10px; text-decoration:none;">
-   ติดต่อสั่งซื้อผ่านเพจ
-</a>
+    <div class="btn-row">
+      <button type="button" class="copy-btn" id="card-copy-btn" style="display:none;" onclick="copyGiftCard(this)">Copy Card Message</button>
+      <a href="https://www.facebook.com/profile.php?id=61574698212892" target="_blank" class="copy-btn">
+        ติดต่อสั่งซื้อผ่านเพจ
+      </a>
+    </div>
+  </div>
 
-  <!-- ===== FACEBOOK CONTENT PANEL ===== -->
+  <!-- CONTENT -->
   <div class="panel" id="panel-content">
     <div class="panel-title">Facebook <span>Content</span> AI</div>
     <div class="panel-sub">สร้าง Caption & โพสต์ขาย ในสไตล์ PD AURUM SCENTS</div>
@@ -919,7 +840,7 @@
     <div class="result-card" id="content-result">
       <div class="result-label">✦ Facebook Content โดย AI</div>
       <div class="result-content" id="content-result-content"></div>
-      <button type="button" class="copy-btn" onclick="copyResult('content-result-content')">Copy All Content</button>
+      <button type="button" class="copy-btn" onclick="copyResult('content-result-content', this)">Copy All Content</button>
     </div>
   </div>
 
@@ -928,7 +849,6 @@
   </footer>
 
   <script>
-    // ===== STATE =====
     let currentFinderStep = 1;
     let selectedCardTone = 'โรแมนติก';
     let selectedPostType = 'โพสต์ขาย';
@@ -965,7 +885,9 @@
       }
     };
 
-    // ===== KEY MANAGEMENT =====
+    const DEMO_CONTENT =
+      '<strong>📌 Caption 1</strong><br>กลิ่นคือความทรงจำที่ลืมไม่ได้ 🖤<br>DR.Savage — ไม่ใช่แค่น้ำหอม แต่คือตัวตนที่คุณเลือกจะเป็น<br>✦ 10ml | 190 บาท<br>#PDaurumscents #DrSavage<br><br><strong>📌 Caption 2</strong><br>อักขระทอง — กลิ่นที่มากกว่าความหอม ✨<br>วนิลลานุ่มนวล เรียกทรัพย์ ชีวิตราบรื่น<br>#อักขระทอง #PDaurum';
+
     function saveKey() {
       const keyInput = document.getElementById('api-key-input');
       const key = keyInput ? keyInput.value.trim() : '';
@@ -994,7 +916,6 @@
       }
     }
 
-    // ===== TAB SWITCHING =====
     function switchTab(tab, el) {
       document.querySelectorAll('.panel').forEach((p) => {
         p.classList.remove('active');
@@ -1012,7 +933,6 @@
       if (el) el.classList.add('active');
     }
 
-    // ===== TAG SELECTION =====
     function selectTag(el, group) {
       if (!el) return;
       const parent = el.closest('.content-tags');
@@ -1027,7 +947,38 @@
       if (group === 'content-style') selectedContentStyle = text;
     }
 
-    // ===== FINDER STEPS =====
+    function resetFinderSteps(stepNumber = 1) {
+      const step1 = document.getElementById('step1');
+      const step2 = document.getElementById('step2');
+      const step3 = document.getElementById('step3');
+
+      step1.className = 'step';
+      step2.className = 'step';
+      step3.className = 'step';
+
+      step1.textContent = '1';
+      step2.textContent = '2';
+      step3.textContent = '3';
+
+      if (stepNumber === 1) {
+        step1.classList.add('active');
+      }
+
+      if (stepNumber === 2) {
+        step1.classList.add('done');
+        step1.textContent = '✓';
+        step2.classList.add('active');
+      }
+
+      if (stepNumber === 3) {
+        step1.classList.add('done');
+        step2.classList.add('done');
+        step1.textContent = '✓';
+        step2.textContent = '✓';
+        step3.classList.add('active');
+      }
+    }
+
     function finderNext() {
       const gender = document.getElementById('recipient-gender').value;
       const age = document.getElementById('recipient-age').value;
@@ -1040,21 +991,10 @@
 
       document.getElementById('finder-step1').style.display = 'none';
       document.getElementById('finder-step2').style.display = 'block';
+      document.getElementById('finder-loading').classList.remove('show');
+      document.getElementById('finder-result').classList.remove('show');
 
-      const step1 = document.getElementById('step1');
-      const step2 = document.getElementById('step2');
-      const step3 = document.getElementById('step3');
-
-      step1.classList.remove('active');
-      step1.classList.add('done');
-      step1.textContent = '✓';
-
-      step2.classList.add('active');
-      step2.classList.remove('done');
-
-      step3.classList.remove('active', 'done');
-      step3.textContent = '3';
-
+      resetFinderSteps(2);
       currentFinderStep = 2;
     }
 
@@ -1064,50 +1004,33 @@
       document.getElementById('finder-loading').classList.remove('show');
       document.getElementById('finder-result').classList.remove('show');
 
-      const step1 = document.getElementById('step1');
-      const step2 = document.getElementById('step2');
-      const step3 = document.getElementById('step3');
-
-      step1.classList.add('active');
-      step1.classList.remove('done');
-      step1.textContent = '1';
-
-      step2.classList.remove('active', 'done');
-      step2.textContent = '2';
-
-      step3.classList.remove('active', 'done');
-      step3.textContent = '3';
-
+      resetFinderSteps(1);
       currentFinderStep = 1;
     }
+
+    function finderBackToStep2() {
+      document.getElementById('finder-step1').style.display = 'none';
+      document.getElementById('finder-step2').style.display = 'block';
+      document.getElementById('finder-loading').classList.remove('show');
+      document.getElementById('finder-result').classList.remove('show');
+
+      resetFinderSteps(2);
+      currentFinderStep = 2;
+    }
+
     function finderBackToStart() {
-  document.getElementById('finder-result').classList.remove('show');
-  document.getElementById('finder-loading').classList.remove('show');
-  document.getElementById('finder-step2').style.display = 'none';
-  document.getElementById('finder-step1').style.display = 'block';
+      document.getElementById('finder-result').classList.remove('show');
+      document.getElementById('finder-loading').classList.remove('show');
+      document.getElementById('finder-step2').style.display = 'none';
+      document.getElementById('finder-step1').style.display = 'block';
 
-  const step1 = document.getElementById('step1');
-  const step2 = document.getElementById('step2');
-  const step3 = document.getElementById('step3');
+      resetFinderSteps(1);
+      currentFinderStep = 1;
+    }
 
-  step1.classList.add('active');
-  step1.classList.remove('done');
-  step1.textContent = '1';
-
-  step2.classList.remove('active', 'done');
-  step2.textContent = '2';
-
-  step3.classList.remove('active', 'done');
-  step3.textContent = '3';
-}
-
-    // ===== API CALL =====
     async function callClaude(prompt, systemPrompt) {
       const key = getKey();
-
-      if (!key) {
-        return 'ERROR_NO_KEY';
-      }
+      if (!key) return 'ERROR_NO_KEY';
 
       const res = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
@@ -1143,22 +1066,6 @@
       return data.content[0].text;
     }
 
-    // Demo responses
-    const DEMO_FINDER =
-      '<strong>✦ แนะนำ: DR.Savage — 190 บาท</strong><br><br>กลิ่นนี้ถูกสร้างมาสำหรับคนที่รู้ว่าตัวเองเป็นใคร สดชื่น สุขุม และมีเสน่ห์โดยไม่ต้องพยายาม<br><br><strong>ข้อความตอนมอบ:</strong> "กลิ่นนี้เลือกมาเพื่อเธอโดยเฉพาะ เพราะเธอมีเสน่ห์ที่ไม่ต้องอธิบาย"<br><br>';
-
-    const DEMO_CARD =
-      'ถึงคนพิเศษ\n\nในทุกกลิ่นหอมที่ลอยผ่านมา\nมีความรู้สึกที่คำพูดไม่อาจบรรยายได้\nเหมือนกับความรู้สึกที่ฉันมีต่อเธอ\n\nขอให้กลิ่นนี้เป็นตัวแทนของทุกสิ่งที่อยากบอก';
-
-    const DEMO_CONTENT =
-      '<strong>📌 Caption 1</strong><br>กลิ่นคือความทรงจำที่ลืมไม่ได้ 🖤<br>DR.Savage — ไม่ใช่แค่น้ำหอม แต่คือตัวตนที่คุณเลือกจะเป็น<br>✦ 10ml | 190 บาท<br>#PDaurumscents #DrSavage<br><br><strong>📌 Caption 2</strong><br>อักขระทอง — กลิ่นที่มากกว่าความหอม ✨<br>วนิลลานุ่มนวล เรียกทรัพย์ ชีวิตราบรื่น<br>#อักขระทอง #PDaurum<br><br><em style="color:var(--gold-dim)"';
-
-    function showNoKeyBanner(resultId, demoContent) {
-      const target = document.getElementById(resultId);
-      if (target) target.innerHTML = demoContent;
-    }
-
-    // ===== SAFE FORMATTER =====
     function escapeHtml(str) {
       return String(str)
         .replace(/&/g, '&amp;')
@@ -1179,7 +1086,78 @@
         .replace(/$/, '</p>');
     }
 
-    // ===== SCENT FINDER AI =====
+    function getLocalScentRecommendation({ gender, personality, budget, usage, occasion }) {
+      if (budget === '890' || usage === 'home' || usage === 'hotel') {
+        return {
+          name: 'Gift Set Diffuser',
+          price: '890 บาท',
+          reason: 'เหมาะกับการใช้ในบ้าน ห้องพัก หรือเป็นของฝากที่ดูครบและให้ความรู้สึกผ่อนคลาย',
+          giftLine: 'เซตนี้เลือกมาเพื่อให้ทุกพื้นที่ที่คุณอยู่ มีกลิ่นที่น่าจดจำ'
+        };
+      }
+
+      if (budget === '390') {
+        if (personality === 'lucky' || occasion === 'new-year') {
+          return {
+            name: 'อักขระทอง',
+            price: '390 บาท',
+            reason: 'เหมาะกับคนที่ชอบของขวัญที่มีความหมายดี ดูเป็นสิริมงคล และให้ภาพลักษณ์อบอุ่นน่าจดจำ',
+            giftLine: 'ขอให้กลิ่นนี้พาความรู้สึกดี ๆ และสิ่งดี ๆ ไปหาคุณ'
+          };
+        }
+
+        return {
+          name: 'อักขระทอง',
+          price: '390 บาท',
+          reason: 'เหมาะกับคนที่ชอบความอบอุ่น นุ่มลึก ดูพิเศษ และรู้สึกว่าของชิ้นนี้ถูกเลือกมาอย่างตั้งใจ',
+          giftLine: 'กลิ่นนี้ไม่ได้ให้แค่ความหอม แต่ให้ความรู้สึกดี ๆ ที่อยากส่งต่อ'
+        };
+      }
+
+      if (gender === 'female' || personality === 'sweet' || personality === 'elegant') {
+        return {
+          name: 'CL.Very Good Diva',
+          price: '190 บาท',
+          reason: 'เหมาะกับลุคหวาน สดใส ดูมีเสน่ห์ และเป็นกลิ่นที่ให้ความรู้สึกน่ารักแต่ยังดูดี',
+          giftLine: 'เลือกกลิ่นนี้ เพราะมันให้ความรู้สึกสดใสและน่าจดจำเหมือนคุณ'
+        };
+      }
+
+      if (gender === 'male' || personality === 'confident') {
+        return {
+          name: 'DR.Savage',
+          price: '190 บาท',
+          reason: 'เหมาะกับคนที่ดูสุขุม มั่นใจ ใช้ง่ายทุกวัน และมีเสน่ห์แบบไม่ต้องพยายาม',
+          giftLine: 'กลิ่นนี้เลือกมาเพื่อคนที่มีตัวตนชัดเจนและน่าค้นหา'
+        };
+      }
+
+      if (personality === 'calm') {
+        return {
+          name: 'Gift Set Diffuser',
+          price: '890 บาท',
+          reason: 'ถ้าผู้รับชอบความสงบและบรรยากาศผ่อนคลาย เซตนี้จะให้ความรู้สึกสบายและใช้ได้จริงในชีวิตประจำวัน',
+          giftLine: 'อยากให้ทุกวันของคุณมีกลิ่นที่ทำให้สบายใจขึ้น'
+        };
+      }
+
+      if (personality === 'lucky') {
+        return {
+          name: 'อักขระทอง',
+          price: '390 บาท',
+          reason: 'ตัวนี้เหมาะกับคนที่ชอบความหมายดี ๆ และอยากได้กลิ่นที่ทั้งอบอุ่นและดูมีเรื่องราว',
+          giftLine: 'ขอให้กลิ่นนี้เป็นอีกหนึ่งความรู้สึกดี ๆ ที่อยู่กับคุณ'
+        };
+      }
+
+      return {
+        name: 'DR.Savage',
+        price: '190 บาท',
+        reason: 'เป็นตัวที่ใช้ง่าย ปลอดภัย และให้ภาพลักษณ์ดูดีในหลายโอกาส',
+        giftLine: 'กลิ่นนี้เป็นหนึ่งในตัวเลือกที่ให้ความประทับใจได้ง่ายและใช้ได้จริง'
+      };
+    }
+
     async function runScentFinder() {
       const key = getKey();
       const isDemo = !key || !key.startsWith('sk-ant-');
@@ -1192,22 +1170,29 @@
       const usage = document.getElementById('usage').value;
 
       document.getElementById('finder-step2').style.display = 'none';
-      document.getElementById('finder-loading').classList.add('show');
       document.getElementById('finder-result').classList.remove('show');
+      document.getElementById('finder-loading').classList.add('show');
 
       if (isDemo) {
+        const rec = getLocalScentRecommendation({
+          gender,
+          personality,
+          budget,
+          usage,
+          occasion
+        });
+
         setTimeout(() => {
           document.getElementById('finder-loading').classList.remove('show');
+          document.getElementById('finder-result-content').innerHTML = `
+            <p><strong>✦ แนะนำ: ${rec.name} — ${rec.price}</strong></p>
+            <p>${rec.reason}</p>
+            <p><strong>ข้อความตอนมอบ:</strong> "${rec.giftLine}"</p>
+          `;
           document.getElementById('finder-result').classList.add('show');
-          showNoKeyBanner('finder-result-content', DEMO_FINDER);
-
-          const step2 = document.getElementById('step2');
-          const step3 = document.getElementById('step3');
-          step2.classList.remove('active');
-          step2.classList.add('done');
-          step2.textContent = '✓';
-          step3.classList.add('active');
-        }, 1200);
+          resetFinderSteps(3);
+          currentFinderStep = 3;
+        }, 700);
         return;
       }
 
@@ -1221,7 +1206,7 @@
 
 ตอบเป็นภาษาไทย-อังกฤษสลับกัน สั้น กระชับ มีเสน่ห์ ให้ความรู้สึก luxury ใช้ emoji น้อยๆ`;
 
-      const prompt = `ลูกค้าต้องการซื้อน้ำหอมเป็นของขวัญให้:
+      const prompt = `ลูกค้าต้องการซื้อน้ำหอมหรือของขวัญให้:
 - ผู้รับ: ${gender}, อายุ ${age}
 - โอกาส: ${occasion}
 - บุคลิก: ${personality}
@@ -1233,97 +1218,85 @@
       try {
         const result = await callClaude(prompt, system);
         document.getElementById('finder-loading').classList.remove('show');
-        document.getElementById('finder-result').classList.add('show');
         document.getElementById('finder-result-content').innerHTML = formatText(result);
-
-        const step2 = document.getElementById('step2');
-        const step3 = document.getElementById('step3');
-
-        step2.classList.remove('active');
-        step2.classList.add('done');
-        step2.textContent = '✓';
-        step3.classList.add('active');
+        document.getElementById('finder-result').classList.add('show');
+        resetFinderSteps(3);
+        currentFinderStep = 3;
       } catch (e) {
         document.getElementById('finder-loading').classList.remove('show');
         document.getElementById('finder-step2').style.display = 'block';
+        resetFinderSteps(2);
         alert('เกิดข้อผิดพลาด: ' + e.message);
       }
     }
 
-    // ===== GIFT CARD AI =====
-    function generateLocalGiftCardMessage({ relation, occasion, product, tone }) {
-  const messages = {
-    'แฟน': {
-      'ครบรอบ': {
-        'โรแมนติก': 'ทุกช่วงเวลาที่มีเธออยู่ข้าง ๆ ทำให้วันธรรมดากลายเป็นวันที่พิเศษเสมอ\nขอให้ของขวัญชิ้นนี้เป็นตัวแทนของความรักและความทรงจำดี ๆ ของเรา',
-        'อบอุ่น': 'ขอบคุณที่อยู่เคียงข้างกันในทุกวัน\nขอให้ของขวัญชิ้นนี้แทนความห่วงใยและความรู้สึกดี ๆ ที่มีให้กันเสมอ',
-        'หรูหรา': 'ในวันพิเศษของเรา ขอมอบของขวัญชิ้นนี้แทนความรักที่เรียบง่ายแต่มีคุณค่า\nและความทรงจำที่งดงามของเราสองคน',
-        'ตลก/เล่นๆ': 'อยู่ด้วยกันมาครบอีกปีแล้วนะ\nของขวัญชิ้นนี้เอาไว้เตือนว่าเรายังต้องทนความน่ารักของกันและกันต่อไปอีกนาน',
-        'เป็นทางการ': 'เนื่องในโอกาสครบรอบ ขอส่งมอบของขวัญชิ้นนี้แทนความปรารถนาดี\nและความรู้สึกที่มีคุณค่าเสมอมา'
-      }
-    },
-    'หัวหน้า': {
-      'ขอบคุณ': {
-        'เป็นทางการ': 'ขอขอบพระคุณสำหรับโอกาส คำแนะนำ และการสนับสนุนที่มีให้เสมอ\nขอมอบของขวัญชิ้นนี้แทนความเคารพและความขอบคุณจากใจ',
-        'อบอุ่น': 'ขอบคุณสำหรับความไว้วางใจและคำแนะนำดี ๆ ที่มีให้เสมอ\nขอมอบของขวัญชิ้นนี้แทนความรู้สึกขอบคุณจากใจ',
-        'หรูหรา': 'ขอขอบพระคุณสำหรับการสนับสนุนและโอกาสที่มอบให้\nของขวัญชิ้นนี้เป็นเพียงคำขอบคุณเล็ก ๆ จากใจ',
-        'ตลก/เล่นๆ': 'ขอบคุณที่ทั้งสอนงานและทำให้ทุกวันมีอะไรให้เรียนรู้อยู่เสมอ\nขอมอบของขวัญชิ้นนี้แทนคำขอบคุณแบบจริงใจ',
-        'เป็นทางการ': 'ขอขอบพระคุณสำหรับโอกาส คำแนะนำ และการสนับสนุนที่มีให้เสมอ\nขอมอบของขวัญชิ้นนี้แทนความเคารพและความขอบคุณจากใจ'
-      }
-    },
-    'ลูกค้า': {
-      'ขอบคุณ': {
-        'เป็นทางการ': 'ขอขอบพระคุณสำหรับความไว้วางใจและการสนับสนุนที่มีให้เสมอ\nขอมอบของขวัญชิ้นนี้แทนคำขอบคุณและความปรารถนาดีจากใจ',
-        'อบอุ่น': 'ขอบคุณที่ไว้วางใจและสนับสนุนกันเสมอมา\nขอมอบของขวัญชิ้นนี้แทนความขอบคุณและความยินดีอย่างยิ่ง',
-        'หรูหรา': 'เพื่อแทนคำขอบคุณสำหรับความไว้วางใจที่มีให้\nขอมอบของขวัญชิ้นนี้ด้วยความยินดีและความปรารถนาดี',
-        'ตลก/เล่นๆ': 'ขอบคุณที่สนับสนุนกันมาตลอด\nหวังว่าของขวัญชิ้นนี้จะทำให้วันของคุณพิเศษขึ้นอีกนิด',
-        'เป็นทางการ': 'ขอขอบพระคุณสำหรับความไว้วางใจและการสนับสนุนที่มีให้เสมอ\nขอมอบของขวัญชิ้นนี้แทนคำขอบคุณและความปรารถนาดีจากใจ'
-      }
+    function generateLocalGiftCardMessage({ relation, occasion, tone }) {
+      const messages = {
+        'แฟน': {
+          'ครบรอบ': {
+            'โรแมนติก': 'ทุกช่วงเวลาที่มีเธออยู่ข้าง ๆ ทำให้วันธรรมดากลายเป็นวันที่พิเศษเสมอ\nขอให้ของขวัญชิ้นนี้เป็นตัวแทนของความรักและความทรงจำดี ๆ ของเรา',
+            'อบอุ่น': 'ขอบคุณที่อยู่เคียงข้างกันในทุกวัน\nขอให้ของขวัญชิ้นนี้แทนความห่วงใยและความรู้สึกดี ๆ ที่มีให้กันเสมอ',
+            'หรูหรา': 'ในวันพิเศษของเรา ขอมอบของขวัญชิ้นนี้แทนความรักที่เรียบง่ายแต่มีคุณค่า\nและความทรงจำที่งดงามของเราสองคน',
+            'ตลก/เล่นๆ': 'อยู่ด้วยกันมาครบอีกปีแล้วนะ\nของขวัญชิ้นนี้เอาไว้เตือนว่าเรายังต้องทนความน่ารักของกันและกันต่อไปอีกนาน',
+            'เป็นทางการ': 'เนื่องในโอกาสครบรอบ ขอส่งมอบของขวัญชิ้นนี้แทนความปรารถนาดี\nและความรู้สึกที่มีคุณค่าเสมอมา'
+          }
+        },
+        'หัวหน้า': {
+          'ขอบคุณ': {
+            'เป็นทางการ': 'ขอขอบพระคุณสำหรับโอกาส คำแนะนำ และการสนับสนุนที่มีให้เสมอ\nขอมอบของขวัญชิ้นนี้แทนความเคารพและความขอบคุณจากใจ',
+            'อบอุ่น': 'ขอบคุณสำหรับความไว้วางใจและคำแนะนำดี ๆ ที่มีให้เสมอ\nขอมอบของขวัญชิ้นนี้แทนความรู้สึกขอบคุณจากใจ',
+            'หรูหรา': 'ขอขอบพระคุณสำหรับการสนับสนุนและโอกาสที่มอบให้\nของขวัญชิ้นนี้เป็นเพียงคำขอบคุณเล็ก ๆ จากใจ',
+            'ตลก/เล่นๆ': 'ขอบคุณที่ทั้งสอนงานและทำให้ทุกวันมีอะไรให้เรียนรู้อยู่เสมอ\nขอมอบของขวัญชิ้นนี้แทนคำขอบคุณแบบจริงใจ'
+          }
+        },
+        'ลูกค้า': {
+          'ขอบคุณ': {
+            'เป็นทางการ': 'ขอขอบพระคุณสำหรับความไว้วางใจและการสนับสนุนที่มีให้เสมอ\nขอมอบของขวัญชิ้นนี้แทนคำขอบคุณและความปรารถนาดีจากใจ',
+            'อบอุ่น': 'ขอบคุณที่ไว้วางใจและสนับสนุนกันเสมอมา\nขอมอบของขวัญชิ้นนี้แทนความขอบคุณและความยินดีอย่างยิ่ง',
+            'หรูหรา': 'เพื่อแทนคำขอบคุณสำหรับความไว้วางใจที่มีให้\nขอมอบของขวัญชิ้นนี้ด้วยความยินดีและความปรารถนาดี',
+            'ตลก/เล่นๆ': 'ขอบคุณที่สนับสนุนกันมาตลอด\nหวังว่าของขวัญชิ้นนี้จะทำให้วันของคุณพิเศษขึ้นอีกนิด'
+          }
+        }
+      };
+
+      const defaultMessages = {
+        'โรแมนติก': 'ขอมอบของขวัญชิ้นนี้แทนความรู้สึกดี ๆ ที่อยากส่งต่อถึงคุณ\nหวังว่าจะทำให้วันพิเศษนี้มีความหมายยิ่งขึ้น',
+        'อบอุ่น': 'ขอมอบของขวัญชิ้นนี้แทนความห่วงใยและความปรารถนาดีจากใจ\nหวังว่าจะทำให้คุณยิ้มได้ในวันพิเศษนี้',
+        'หรูหรา': 'ขอมอบของขวัญชิ้นนี้แทนความตั้งใจและความรู้สึกดี ๆ ที่มีให้\nหวังว่าจะเป็นความประทับใจเล็ก ๆ ในวันพิเศษนี้',
+        'ตลก/เล่นๆ': 'ขอมอบของขวัญชิ้นนี้พร้อมรอยยิ้มและความตั้งใจดี ๆ\nหวังว่าจะเพิ่มความสดใสให้วันของคุณ',
+        'เป็นทางการ': 'ขอมอบของขวัญชิ้นนี้แทนความปรารถนาดีและความเคารพจากใจ\nหวังว่าจะสร้างความประทับใจในโอกาสนี้'
+      };
+
+      const relationSet = messages[relation];
+      const occasionSet = relationSet && relationSet[occasion];
+      const toneMessage = occasionSet && occasionSet[tone];
+
+      return toneMessage || defaultMessages[tone] || defaultMessages['อบอุ่น'];
     }
-  };
 
-  const defaultMessages = {
-    'โรแมนติก': 'ขอมอบของขวัญชิ้นนี้แทนความรู้สึกดี ๆ ที่อยากส่งต่อถึงคุณ\nหวังว่าจะทำให้วันพิเศษนี้มีความหมายยิ่งขึ้น',
-    'อบอุ่น': 'ขอมอบของขวัญชิ้นนี้แทนความห่วงใยและความปรารถนาดีจากใจ\nหวังว่าจะทำให้คุณยิ้มได้ในวันพิเศษนี้',
-    'หรูหรา': 'ขอมอบของขวัญชิ้นนี้แทนความตั้งใจและความรู้สึกดี ๆ ที่มีให้\nหวังว่าจะเป็นความประทับใจเล็ก ๆ ในวันพิเศษนี้',
-    'ตลก/เล่นๆ': 'ขอมอบของขวัญชิ้นนี้พร้อมรอยยิ้มและความตั้งใจดี ๆ\nหวังว่าจะเพิ่มความสดใสให้วันของคุณ',
-    'เป็นทางการ': 'ขอมอบของขวัญชิ้นนี้แทนความปรารถนาดีและความเคารพจากใจ\nหวังว่าจะสร้างความประทับใจในโอกาสนี้'
-  };
+    async function runGiftCard() {
+      const key = getKey();
 
-  const relationSet = messages[relation];
-  const occasionSet = relationSet && relationSet[occasion];
-  const toneMessage = occasionSet && occasionSet[tone];
+      const from = document.getElementById('card-from').value.trim() || 'ผู้ส่ง';
+      const relation = document.getElementById('card-relation').value;
+      const occasion = document.getElementById('card-occasion').value;
+      const product = document.getElementById('card-product').value;
+      const tone = selectedCardTone;
 
-  if (toneMessage) return toneMessage;
-  return defaultMessages[tone] || defaultMessages['อบอุ่น'];
-}
-async function runGiftCard() {
-  const key = getKey();
+      document.getElementById('card-loading').classList.add('show');
+      document.getElementById('gift-card-preview').classList.remove('show');
+      document.getElementById('card-copy-btn').style.display = 'none';
 
-  const from = document.getElementById('card-from').value.trim() || 'ผู้ส่ง';
-  const to = document.getElementById('card-to').value.trim() || 'ผู้รับ';
-  const relation = document.getElementById('card-relation').value;
-  const occasion = document.getElementById('card-occasion').value;
-  const product = document.getElementById('card-product').value;
-  const tone = selectedCardTone;
+      if (!key || !key.startsWith('sk-ant-')) {
+        const localMessage = generateLocalGiftCardMessage({ relation, occasion, product, tone });
 
-  document.getElementById('card-loading').classList.add('show');
-  document.getElementById('gift-card-preview').classList.remove('show');
-  document.getElementById('card-copy-btn').style.display = 'none';
-
-  if (!key || !key.startsWith('sk-ant-')) {
-    const localMessage = generateLocalGiftCardMessage({ from, to, relation, occasion, product, tone });
-
-    document.getElementById('card-loading').classList.remove('show');
-    document.getElementById('gift-message-content').textContent = localMessage;
-    document.getElementById('gift-sign-content').textContent = `— ${from}`;
-    document.getElementById('gift-card-preview').classList.add('show');
-    document.getElementById('card-copy-btn').style.display = 'inline-block';
-    return;
-  }
-      
-      
-
+        document.getElementById('card-loading').classList.remove('show');
+        document.getElementById('gift-message-content').textContent = localMessage;
+        document.getElementById('gift-sign-content').textContent = `— ${from}`;
+        document.getElementById('gift-card-preview').classList.add('show');
+        document.getElementById('card-copy-btn').style.display = 'inline-block';
+        return;
+      }
 
       const system = `คุณเป็น Copywriter หัวใจอ่อนของ PD AURUM SCENTS เขียนข้อความในการ์ดของขวัญที่ทำให้คนรู้สึกพิเศษ มีคุณค่า และจดจำได้ตลอดไป
 สไตล์การเขียน: กระทัดรัด มีความหมายลึก ไม่ยาวเกินไป ทำให้ผู้รับรู้สึกว่าน้ำหอมนี้ถูกเลือกมาเพื่อเขา/เธอโดยเฉพาะ
@@ -1331,7 +1304,6 @@ async function runGiftCard() {
 
       const prompt = `สร้างข้อความในการ์ดของขวัญ:
 - จาก: ${from} (เป็น${relation}ของผู้รับ)
-- ถึง: ${to}
 - โอกาส: ${occasion}
 - สินค้า: ${product}
 - โทน: ${tone}
@@ -1351,7 +1323,6 @@ async function runGiftCard() {
       }
     }
 
-    // ===== CONTENT AI =====
     async function runContentAI() {
       const key = getKey();
       const isDemo = !key || !key.startsWith('sk-ant-');
@@ -1376,7 +1347,7 @@ async function runGiftCard() {
           document.getElementById('content-loading').classList.remove('show');
           document.getElementById('content-result').classList.add('show');
           document.getElementById('content-result-content').innerHTML = DEMO_CONTENT;
-        }, 1200);
+        }, 800);
         return;
       }
 
@@ -1404,55 +1375,164 @@ ${theme ? `หัวข้อ/เทศกาล: ${theme}` : ''}
       }
     }
 
-    // ===== COPY =====
-    async function copyResult(id) {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const text = el.innerText || el.textContent || '';
-      let copied = false;
-
+    async function copyText(text) {
       try {
         await navigator.clipboard.writeText(text);
-        copied = true;
+        return true;
       } catch (err) {
         const temp = document.createElement('textarea');
         temp.value = text;
         document.body.appendChild(temp);
         temp.select();
+        let copied = false;
         try {
           copied = document.execCommand('copy');
         } catch (e) {
           copied = false;
         }
         document.body.removeChild(temp);
+        return copied;
       }
+    }
 
-      const btn =
-        (el.parentElement && el.parentElement.querySelector('.copy-btn')) ||
-        document.getElementById('card-copy-btn');
+    async function copyResult(id, btnEl) {
+      const el = document.getElementById(id);
+      if (!el) return;
 
-      if (btn && copied) {
-        const orig = btn.textContent;
-        btn.textContent = '✓ Copied!';
+      const text = el.innerText || el.textContent || '';
+      const copied = await copyText(text);
+
+      if (copied && btnEl) {
+        const orig = btnEl.textContent;
+        btnEl.textContent = '✓ Copied!';
         setTimeout(() => {
-          btn.textContent = orig;
+          btnEl.textContent = orig;
         }, 2000);
       } else if (!copied) {
         alert('คัดลอกไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
       }
     }
 
-    // ===== INIT =====
-    window.onload = () => {
-      const saved = localStorage.getItem('pd_aurum_key');
-      const input = document.getElementById('api-key-input');
-      if (saved && input) {
-        input.value = saved;
+    async function copyGiftCard(btnEl) {
+      const message = document.getElementById('gift-message-content')?.textContent || '';
+      const sign = document.getElementById('gift-sign-content')?.textContent || '';
+      const text = `${message}\n${sign}`.trim();
+
+      const copied = await copyText(text);
+      if (copied && btnEl) {
+        const orig = btnEl.textContent;
+        btnEl.textContent = '✓ Copied!';
+        setTimeout(() => {
+          btnEl.textContent = orig;
+        }, 2000);
+      } else if (!copied) {
+        alert('คัดลอกไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
       }
-      updateKeyStatus();
-      switchTab('finder', document.querySelector('.tab-btn.active'));
+    }
+    function getLocalScentRecommendation({ gender, personality, budget, usage, occasion }) {
+  if (budget === '890' || usage === 'home' || usage === 'hotel') {
+    return {
+      name: 'Gift Set Diffuser',
+      price: '890 บาท',
+      reason: 'เหมาะกับการใช้ในบ้าน ห้องพัก หรือเป็นของฝากที่ดูครบและให้ความรู้สึกผ่อนคลาย',
+      giftLine: 'เซตนี้เลือกมาเพื่อให้ทุกพื้นที่ที่คุณอยู่ มีกลิ่นที่น่าจดจำ'
     };
+  }
+
+  if (budget === '390') {
+    return {
+      name: 'อักขระทอง',
+      price: '390 บาท',
+      reason: 'เหมาะกับคนที่ชอบความอบอุ่น นุ่มลึก มีความหมาย และดูพิเศษมากขึ้นในฐานะของขวัญ',
+      giftLine: 'กลิ่นนี้ไม่ได้ให้แค่ความหอม แต่ให้ความรู้สึกดี ๆ ที่อยากส่งต่อ'
+    };
+  }
+
+  if (gender === 'female' || personality === 'sweet' || personality === 'elegant') {
+    return {
+      name: 'CL.Very Good Diva',
+      price: '190 บาท',
+      reason: 'เหมาะกับลุคหวาน สดใส ดูมีเสน่ห์ และเป็นกลิ่นที่ให้ความรู้สึกน่ารักแต่ยังดูดี',
+      giftLine: 'เลือกกลิ่นนี้ เพราะมันให้ความรู้สึกสดใสและน่าจดจำเหมือนคุณ'
+    };
+  }
+
+  if (gender === 'male' || personality === 'confident') {
+    return {
+      name: 'DR.Savage',
+      price: '190 บาท',
+      reason: 'เหมาะกับคนที่ดูสุขุม มั่นใจ ใช้ง่ายทุกวัน และมีเสน่ห์แบบไม่ต้องพยายาม',
+      giftLine: 'กลิ่นนี้เลือกมาเพื่อคนที่มีตัวตนชัดเจนและน่าค้นหา'
+    };
+  }
+
+  if (personality === 'lucky' || occasion === 'new-year') {
+    return {
+      name: 'อักขระทอง',
+      price: '390 บาท',
+      reason: 'เหมาะกับการมอบเป็นของขวัญที่มีความหมายดี ดูเป็นสิริมงคล และให้ความรู้สึกพิเศษ',
+      giftLine: 'ขอให้กลิ่นนี้พาความรู้สึกดี ๆ และสิ่งดี ๆ ไปหาคุณ'
+    };
+  }
+
+  return {
+    name: 'DR.Savage',
+    price: '190 บาท',
+    reason: 'เป็นตัวที่ใช้ง่าย ปลอดภัย และให้ภาพลักษณ์ดูดีในหลายโอกาส',
+    giftLine: 'กลิ่นนี้เป็นหนึ่งในตัวเลือกที่ให้ความประทับใจได้ง่ายและใช้ได้จริง'
+  };
+}
+
+async function runScentFinder() {
+  const gender = document.getElementById('recipient-gender').value;
+  const occasion = document.getElementById('occasion').value;
+  const personality = document.getElementById('personality').value;
+  const budget = document.getElementById('budget').value;
+  const usage = document.getElementById('usage').value;
+
+  document.getElementById('finder-step2').style.display = 'none';
+  document.getElementById('finder-loading').classList.add('show');
+  document.getElementById('finder-result').classList.remove('show');
+
+  const rec = getLocalScentRecommendation({
+    gender,
+    personality,
+    budget,
+    usage,
+    occasion
+  });
+
+  setTimeout(() => {
+    document.getElementById('finder-loading').classList.remove('show');
+    document.getElementById('finder-result-content').innerHTML = `
+      <p><strong>✦ แนะนำ: ${rec.name} — ${rec.price}</strong></p>
+      <p>${rec.reason}</p>
+      <p><strong>ข้อความตอนมอบ:</strong> "${rec.giftLine}"</p>
+    `;
+    document.getElementById('finder-result').classList.add('show');
+
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+
+    step1.className = 'step done';
+    step2.className = 'step done';
+    step3.className = 'step active';
+
+    step1.textContent = '✓';
+    step2.textContent = '✓';
+    step3.textContent = '3';
+  }, 700);
+}
+   window.onload = () => {
+  localStorage.removeItem('pd_aurum_key');
+
+  const input = document.getElementById('api-key-input');
+  if (input) input.value = '';
+
+  updateKeyStatus();
+  switchTab('finder', document.querySelector('.tab-btn.active'));
+};
   </script>
 </body>
 </html>
