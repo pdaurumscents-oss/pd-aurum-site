@@ -1530,8 +1530,21 @@ async function runScentFinder() {
   const input = document.getElementById('api-key-input');
   if (input) input.value = '';
 
+  // ซ่อนแท็บ Setup
+  document.querySelectorAll('.tab-btn').forEach((btn) => {
+    if (btn.textContent && btn.textContent.toLowerCase().includes('setup')) {
+      btn.style.display = 'none';
+    }
+  });
+
+  // ซ่อนหน้า Setup
+  const setupPanel = document.getElementById('panel-setup');
+  if (setupPanel) {
+    setupPanel.style.display = 'none';
+  }
+
   updateKeyStatus();
-  switchTab('finder', document.querySelector('.tab-btn.active'));
+  switchTab('finder', document.querySelector('.tab-btn'));
 };
   </script>
 </body>
