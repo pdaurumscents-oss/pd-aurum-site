@@ -745,7 +745,6 @@
       </div>
 
       <div style="display:flex; gap:12px">
-      
   <button type="button" class="btn-gold" style="flex:0 0 auto; width:auto; padding:18px 24px" onclick="finderBack()">
     <span>← ย้อนกลับ / Back</span>
   </button>
@@ -754,19 +753,23 @@
     <span>✦ ค้นหากลิ่นที่ใช่ / Find Match</span>
   </button>
 </div>
-      </div>
-    </div>
-
+    
     <div class="loading" id="finder-loading">
       <div>✦ AI กำลังวิเคราะห์ <span class="loading-dots"></span></div>
     </div>
 
     <div class="result-card" id="finder-result">
-      <div class="result-label">✦ คำแนะนำจาก AI / AI Recommendation</div>
-      <div class="result-content" id="finder-result-content"></div>
-      <button type="button" class="copy-btn" onclick="copyResult('finder-result-content')">Copy Result</button>
-    </div>
-  </div>
+  <div class="result-label">✦ คำแนะนำจาก AI / AI Recommendation</div>
+  <div class="result-content" id="finder-result-content"></div>
+
+  <button type="button" class="copy-btn" onclick="copyResult('finder-result-content')">
+    Copy Result
+  </button>
+
+  <button type="button" class="copy-btn" onclick="finderBackToStart()" style="margin-left:10px;">
+    เริ่มใหม่ / Start Over
+  </button>
+</div>
 
   <!-- ===== GIFT CARD PANEL ===== -->
   <div class="panel" id="panel-card">
