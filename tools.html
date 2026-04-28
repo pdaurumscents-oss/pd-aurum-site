@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>มาเลือกของขวัญให้คนที่คุณใส่ใจกันเถอะ | PD AURUM SCENTS</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
- <style>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <style>
     :root {
       --black: #080808;
       --white: #f5f0e8;
@@ -770,10 +771,9 @@
       <div class="gift-message" id="gift-message-content"></div>
       <div class="gift-sign" id="gift-sign-content"></div>
     </div>
-
-    <div class="btn-row">
-      <button id="card-copy-btn" style="display:none;" onclick="copyGiftCard(this)">Copy Card Message</button>
-      <a href="https://www.facebook.com/profile.php?id=61574698212892" target="_blank" class="copy-btn">
+<div class="btn-row">
+    <button id="card-copy-btn" class="copy-btn" style="display:none;" onclick="saveGiftCardImage(this)">บันทึกรูปภาพ</button>
+    <a href="https://www.facebook.com/profile.php?id=61574698212892" target="_blank" class="copy-btn">
         ติดต่อสั่งซื้อผ่านเพจ
       </a>
     </div>
@@ -1483,7 +1483,67 @@ ${theme ? `หัวข้อ/เทศกาล: ${theme}` : ''}
     giftLine: 'กลิ่นนี้เป็นหนึ่งในตัวเลือกที่ให้ความประทับใจได้ง่ายและใช้ได้จริง'
   };
 }
+async function saveGiftCardImage(button) {
+  const card = document.getElementById('gift-card-preview');
 
+  if (!card) {
+    alert('ไม่พบการ์ดสำหรับบันทึกภาพ');
+    return;
+  }
+
+  const oldText = button ? button.textContent : '';
+
+  try {
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'กำลังสร้างรูป...';
+    }
+
+    const canvas = await html2canvas(card, {
+      backgroundColor: '#080808',
+      scale: 3,
+      useCORS: true
+    });
+
+    const blob = await new Promise((resolve) => {
+      canvas.toBlob(resolve, 'image/png');
+    });
+
+    if (!blob) {
+      throw new Error('สร้างไฟล์ภาพไม่สำเร็จ');
+    }
+
+    const file = new File([blob], 'PD-AURUM-SCENTS-Gift-Card.png', {
+      type: 'image/png'
+    });
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        files: [file],
+        title: 'PD AURUM SCENTS Gift Card',
+        text: 'บันทึกการ์ดของขวัญเป็นรูปภาพ'
+      });
+    } else {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'PD-AURUM-SCENTS-Gift-Card.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+      alert('ดาวน์โหลดรูปแล้ว ถ้าใช้ iPhone/iPad ให้เปิดไฟล์แล้วกด Share > Save Image');
+    }
+  } catch (e) {
+    alert('บันทึกภาพไม่สำเร็จ: ' + e.message);
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = oldText || 'บันทึกรูปภาพ';
+    }
+  }
+}
 async function runScentFinder() {
   const gender = document.getElementById('recipient-gender').value;
   const occasion = document.getElementById('occasion').value;
