@@ -400,22 +400,42 @@
       background: #333;
     }
 
-    .gift-card-preview {
-      background: linear-gradient(135deg, #0d0d0d 0%, #1a1200 50%, #0d0d0d 100%);
-      border: 1px solid var(--gold-dim);
-      padding: 40px 32px;
-      margin-top: 32px;
-      text-align: center;
-      position: relative;
-      display: none;
-      animation: fadeUp 0.4s ease;
-    }
-
+.gift-card-preview {
+  background:
+    radial-gradient(circle at center, rgba(212, 175, 55, 0.22), transparent 58%),
+    linear-gradient(135deg, #3a2a1f 0%, #4a3528 50%, #3a2a1f 100%);
+  color: #fff8ef;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  padding: 40px 32px;
+  margin-top: 32px;
+  text-align: center;
+  position: relative;
+  display: none;
+  animation: fadeUp 0.4s ease;
+  box-shadow:
+    0 0 30px rgba(212, 175, 55, 0.16),
+    inset 0 0 40px rgba(255, 245, 230, 0.03);
+}
     .gift-card-preview.show {
-      display: block;
-    }
+  display: block;
+}
+    .gift-card-preview,
+.gift-card-preview p,
+.gift-card-preview div,
+.gift-card-preview span,
+.gift-card-preview h1,
+.gift-card-preview h2,
+.gift-card-preview h3 {
+  color: #fff8ef !important;
+  opacity: 1 !important;
+}
 
-    .gift-card-preview::before,
+.gift-card-preview .brand,
+.gift-card-preview .signature {
+  color: #d4af37 !important;
+}
+    
+.gift-card-preview::before,
     .gift-card-preview::after {
       content: "";
       position: absolute;
