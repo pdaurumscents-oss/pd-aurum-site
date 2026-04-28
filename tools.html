@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>มาเลือกของขวัญให้คนที่คุณใส่ใจกันเถอะ | PD AURUM SCENTS</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <style>
     :root {
       --black: #080808;
@@ -772,7 +773,7 @@
     </div>
 
     <div class="btn-row">
-      <button type="button" class="copy-btn" id="card-copy-btn" style="display:none;" onclick="copyGiftCard(this)">Copy Card Message</button>
+      <button style="display:none;" onclick="saveGiftCardImage(this)">บันทึกภาพการ์ด</button>
       <a href="https://www.facebook.com/profile.php?id=61574698212892" target="_blank" class="copy-btn">
         ติดต่อสั่งซื้อผ่านเพจ
       </a>
@@ -1429,6 +1430,42 @@ ${theme ? `หัวข้อ/เทศกาล: ${theme}` : ''}
         alert('คัดลอกไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
       }
     }
+    async function saveGiftCardImage(button) {
+  const card = document.querySelector('#gift-card-preview');
+
+  if (!card) {
+    alert('ไม่พบการ์ดสำหรับบันทึกภาพ');
+    return;
+  }
+
+  try {
+    const canvas = await html2canvas(card, {
+      backgroundColor: '#080808',
+      scale: 3,
+      useCORS: true
+    });
+
+    const image = canvas.toDataURL('image/png');
+
+    const link = document.createElement('a');
+    link.href = image;
+    link.download = 'PD-AURUM-SCENTS-Gift-Card.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    if (button) {
+      const oldText = button.textContent;
+      button.textContent = '✓ บันทึกแล้ว';
+      setTimeout(() => {
+        button.textContent = oldText;
+      }, 1800);
+    }
+  } catch (error) {
+    alert('บันทึกภาพไม่สำเร็จ กรุณาลองแคปหน้าจอแทนชั่วคราว');
+    console.error(error);
+  }
+}
     function getLocalScentRecommendation({ gender, personality, budget, usage, occasion }) {
   if (budget === '890' || usage === 'home' || usage === 'hotel') {
     return {
